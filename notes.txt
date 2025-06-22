@@ -1,0 +1,15 @@
+=================
+----- NOTES -----
+=================
+
+react-spring
+    - EXAMPLES: https://www.react-spring.dev/examples
+    - rolling wave: https://codesandbox.io/p/sandbox/b07dmz?file=%2Fsrc%2FApp.tsx
+    - moving card: https://codesandbox.io/p/sandbox/pf74x?file=%2Fsrc%2FApp.tsx
+
+
+inspiration
+
+nav bars
+    - https://qodeinteractive.com/magazine/websites-with-inspiring-menu-design/
+    
