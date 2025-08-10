@@ -1,0 +1,76 @@
+@import url('../../../index.css');
+
+.frame {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: 20px;
+}
+
+/* Always applied to image layers */
+.layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block; /* override any rogue global flex */
+  object-fit: cover;
+  object-position: center;
+  z-index: 1;
+}
+
+/* Optional: only add once you confirm images show up */
+.mask {
+  mask-image: url('/ctvMask.svg'); /* <-- use a REAL mask asset */
+  mask-repeat: no-repeat;
+  mask-position: 50% 50%;
+  mask-size: cover;
+
+  -webkit-mask-image: url('/ctvMask.svg');
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: 50% 50%;
+  -webkit-mask-size: cover;
+}
+
+/* Sequencing animation */
+/* .flash {
+  opacity: 0;
+  animation-name: flashCycle;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-fill-mode: both; 
+} */
+.flash {
+  animation-name: flashCycle;
+  animation-iteration-count: infinite;
+  animation-fill-mode: both;
+  animation-timing-function: steps(1, end); /* <-- instant jump, no fade */
+}
+
+@keyframes flashCycle {
+  0% {
+    opacity: 1;
+  }
+  40% {
+    opacity: 1;
+  } /* overlap the next slot */
+  40.0001% {
+    opacity: 0;
+  } /* fade out */
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Overlay on top */
+.overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  z-index: 3;
+  pointer-events: none;
+  object-fit: cover;
+  object-position: center;
+}

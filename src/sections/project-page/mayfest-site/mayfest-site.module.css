@@ -1,0 +1,55 @@
+@import url("../../../index.css");
+
+
+.content, .content * {
+    display: flex;
+}
+
+.content {
+    /* border: 2px solid yellow; */
+    margin: 0;
+    height: 100%;
+    flex-direction: row !important;
+    align-items: center;
+    gap: 0;
+}
+
+.left { 
+    /* border: 2px solid blue; */
+    height: 100%;
+
+}
+
+.right {
+    /* border: 2px solid blue; */
+  height: 100%;
+}
+
+.projectTitle {
+    margin: 0;
+}
+
+.jobTitle {
+    margin: 0;
+    font-weight: 400;
+
+}
+
+.description {
+
+}
+
+.fastFacts {
+
+}
+
+.factNodes {
+    flex-direction: row !important;
+    gap: 10px;
+
+}
+
+
+/* @media screen & ({
+    
+} */

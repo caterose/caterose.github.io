@@ -1,0 +1,33 @@
+@import url('../../index.css');
+
+.marqueeViewport {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+
+  contain: layout paint;
+}
+
+.innerTrack {
+  display: flex;
+  flex-direction: row;
+  will-change: transform;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+.rowCopy {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.measure {
+  position: absolute;
+  visibility: hidden;
+  pointer-events: none;
+  white-space: nowrap;
+  left: -99999px;
+  top: 0;
+}

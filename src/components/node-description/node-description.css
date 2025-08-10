@@ -1,0 +1,20 @@
+@import url('../../index.css');
+
+.class-node {
+  display: inline-block;
+  border-radius: 100px;
+  border: 1px solid var(--primary-blue);
+  font-family: var(--font-primary);
+  color: var(--primary-blue);
+  padding: 10px 20px;
+  /* background-color: red; */
+}
+
+.project-node {
+  display: inline-block;
+  border-radius: 20px;
+  border: 1px solid var(--neutral-white);
+  font-family: var(--font-secondary);
+  color: var(--neutral-white);
+  padding: 4px 8px;
+}

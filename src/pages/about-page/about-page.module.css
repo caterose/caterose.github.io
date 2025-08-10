@@ -1,0 +1,108 @@
+@import url('../../index.css');
+
+.navProjects {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  overflow: hidden;
+}
+
+.projectContent {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+.projectNav {
+  /* border: 2px red solid; */
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 10;
+}
+
+.navDot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1px solid white;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.navDot.active {
+  background-color: white;
+}
+
+/* !! ====== WAS WORKING BELOW */
+/* 
+.frame {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: 20px;
+}
+
+.layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+  z-index: 1;
+}
+
+.mask {
+  mask-image: url('/ctvMask.svg');
+  mask-repeat: no-repeat;
+  mask-position: 50% 50%;
+  mask-size: cover;
+
+  -webkit-mask-image: url('/ctvMask.svg');
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: 50% 50%;
+  -webkit-mask-size: cover;
+}
+
+.flash {
+  opacity: 0;
+  animation-name: flashCycle;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-fill-mode: both;
+}
+
+@keyframes flashCycle {
+  0% {
+    opacity: 1;
+  }
+  20% {
+    opacity: 1;
+  }
+  21% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  z-index: 3;
+  pointer-events: none;
+  object-fit: cover;
+  object-position: center;
+}
+ */

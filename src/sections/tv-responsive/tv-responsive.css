@@ -1,0 +1,162 @@
+@import url('../../index.css');
+
+.tv-div {
+  display: flex;
+  flex-direction: row;
+  margin: 40px auto 0 auto;
+  /* top auto bottom auto */
+  gap: 20px;
+
+  width: 100%;
+  max-width: 1600px; /* controls how wide it can grow */
+  /* padding-left: 20px;
+  padding-right: 20px; */
+  box-sizing: border-box;
+  justify-content: space-between;
+
+  /* border: 10px solid red; */
+}
+.tv-screen-outer,
+.tv-screen-inner,
+.tv-side-panel,
+.top-dials,
+.dial,
+.mid-buttons,
+.grills-div,
+.grill {
+  display: flex;
+  flex-direction: column;
+}
+
+/* .tv-screen-outer {
+    border-radius: 20px;
+    border: 1px solid var(--primary-blue);
+    width: 80%;
+    height: 600px;
+    padding: 20px;
+}
+
+.tv-screen-inner {
+    
+    border-radius: 20px;
+    width: 100%;
+    height: 100%;
+    border: 1px solid var(--primary-blue);
+} */
+
+.tv-screen-outer {
+  border-radius: 20px;
+  border: 1px solid var(--primary-blue);
+  width: 80%;
+  /* height: 700px; */
+  min-height: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.tv-screen-inner {
+  /* Give it a concrete height or let the child control via aspect-ratio */
+  /* Example: */
+  min-height: 600px;
+  border: 1px solid var(--primary-blue);
+  border-radius: 20px;
+  overflow: hidden; /* keep content clipped */
+  position: relative; /* anchor absolutely-positioned children */
+
+  /* border-radius: 20px;
+  width: 100%;
+  height: 100%;
+  border: 1px solid var(--primary-blue);
+  overflow: hidden; 
+  position: relative;  */
+}
+
+.tv-side-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 10px;
+
+  border: 1px solid var(--primary-blue);
+  width: 200px;
+  min-height: 100%;
+  border-radius: 10px;
+  gap: 40px;
+  /* gap: 10px; */
+}
+
+.top-dials {
+  gap: 10px;
+  margin-top: 20px;
+  /* margin-bottom: 20px; */
+}
+
+.dial {
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  border: 1px solid var(--primary-blue);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background-color: var(--primary-blue); */
+}
+
+.dial .button-svg {
+  color: var(--primary-blue);
+}
+
+.mid-buttons-div {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.mid-buttons {
+  border: 1px solid var(--primary-blue);
+  width: 50px;
+  height: 20px;
+  border-radius: 5px;
+}
+
+.grills-div {
+  gap: 7px;
+  margin-bottom: 20px;
+}
+
+.grill {
+  width: 110px;
+  height: 5px;
+  border-radius: 5px;
+  border: 1px solid var(--primary-blue);
+}
+
+/* .tv {
+    display: flex;
+    flex-direction: row;
+    background-color: var(--primary-blue);
+    height: 100vh;
+    width: 100vw;
+    margin: 0 !important;
+    margin-left: 0;
+    padding: 0 !important;
+    border: 2px solid red;
+} */
+/* * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+} */
+
+/* .tv * {
+    display: flex;
+} */
+
+/* .tv-screen-outer { */
+/* border: 2px solid red; */
+/* var(--neutral-white); */
+/* } */
+
+@media screen and (max-width: 768px) {
+}

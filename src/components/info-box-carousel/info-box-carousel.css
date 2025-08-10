@@ -1,0 +1,103 @@
+@import url("../../index.css");
+
+.box-carousel {
+  position: relative;
+  /* gap: 10px; */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.inner-box {
+  position: relative;
+
+  padding: 10px;
+  width: 85%;
+  overflow: visible;
+}
+
+.blur-over {
+  position: absolute;
+  top: 0;
+  width: 25px;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.blur-over.b-left {
+  left: 0;
+  /* width: 50px; */
+  /* border: 3px solid lime; */
+  background: linear-gradient(
+    to right,
+    var(--neutral-white) 0%,
+    transparent 100%
+  );
+  /* background: linear-gradient(to right, var(--neutral-white) 0%, transparent 100%); */
+}
+
+.blur-over.b-right {
+  position: absolute;
+  /* z-index: 99; */
+  /* border: 3px solid lime; */
+  right: 0;
+  /* width: 50px; */
+  background: linear-gradient(
+    to left,
+    var(--neutral-white) 0%,
+    transparent 100%
+  );
+}
+
+.boxes {
+  /* border: 3px solid lime; */
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  overflow-x: auto;
+  position: relative;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+
+  padding: 0;
+  margin: 0;
+
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-x;
+}
+
+.boxes::-webkit-scrollbar {
+  display: none;
+}
+
+.boxes > * {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  cursor: pointer;
+  /* box-shadow: none !important; */
+}
+
+.button-icon {
+  cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+  .boxes {
+    display: flex;
+    flex-direction: row;
+    gap: 0;
+    overflow-x: auto;
+    position: relative;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+
+    padding: 0;
+    margin: 0;
+
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-x;
+  }
+}

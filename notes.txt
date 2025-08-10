@@ -1,3 +1,11 @@
+=====================
+----- CITATIONS -----
+=====================
+
+    - cursor: https://medium.com/@jaredloson/custom-javascript-cursor-in-react-d7ffefb2db38
+
+
+
 =================
 ----- NOTES -----
 =================
@@ -6,10 +14,15 @@ react-spring
     - EXAMPLES: https://www.react-spring.dev/examples
     - rolling wave: https://codesandbox.io/p/sandbox/b07dmz?file=%2Fsrc%2FApp.tsx
     - moving card: https://codesandbox.io/p/sandbox/pf74x?file=%2Fsrc%2FApp.tsx
+    - carousel??: https://codesandbox.io/p/sandbox/8s3kf?file=%2Fsrc%2FApp.tsx%3A20%2C35
+    
 
+slider:
+    - https://www.sliderrevolution.com/resources/css-page-transitions/
+    - https://www.awwwards.com/awwwards/collections/transitions/
 
 inspiration
 
 nav bars
     - https://qodeinteractive.com/magazine/websites-with-inspiring-menu-design/
-    
+
