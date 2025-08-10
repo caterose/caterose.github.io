@@ -23,7 +23,7 @@ const Hello: React.FC<HelloProps> = ({ interests }: HelloProps) => {
         <div className={styles.helloDiv}>
           <div className={styles.title}>
             <h1 ref={helloRef} className={styles.hello}>
-              hi! my name is <span>cate rose.</span>
+              HI. I'M <span>CATE ROSE.</span>
             </h1>
             <h3 className={styles.subtitle}>(programmer, historian, artist, nerd) </h3>
 

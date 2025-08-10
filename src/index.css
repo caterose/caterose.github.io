@@ -9,7 +9,8 @@
   --neutral-white-cursor: rgba(251, 246, 243, 0.5);
   --neutral-black: #1f1e1e;
 
-  --primary-blue: #1a53e6;
+  --primary-blue: #1f1e1e;
+  /* --primary-blue: #1a53e6; */
   --primary-blue-cursor: rgba(26, 83, 230, 0.5);
 
   --secondary-green: #098b3b;

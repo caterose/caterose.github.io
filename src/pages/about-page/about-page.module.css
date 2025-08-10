@@ -30,13 +30,21 @@
   width: 18px;
   height: 18px;
   border-radius: 50%;
-  border: 1px solid white;
+  border: 1px solid var(--neutral-white);
   cursor: pointer;
   transition: all 0.3s;
 }
 
 .navDot.active {
-  background-color: white;
+  background-color: var(--neutral-white);
+}
+
+.inverseDot {
+  border: 1px solid var(--primary-blue) !important;
+}
+
+.inverseDot.active {
+  background-color: var(--primary-blue) !important;
 }
 
 /* !! ====== WAS WORKING BELOW */

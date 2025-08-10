@@ -3,13 +3,13 @@ import { useTransition } from '@react-spring/web';
 import { useIndexTransition } from '../../hooks/use-index-transition';
 import PageMapping from '../../components/page-mapping/page-mapping';
 import type { PageItem } from '../../components/page-mapping/page-mapping';
-import styles from './about-page.module.css';
+import styles from './art-page.module.css';
 
-interface AboutProps {
+interface ArtPageProps {
   pages: PageItem[];
 }
 
-const AboutPage = ({ pages }: { pages: PageItem[] }) => {
+const ArtPage = ({ pages }: { pages: PageItem[] }) => {
   const { transitions, activeIndex, goTo } = useIndexTransition(pages.length, {
     axis: 'y', // or 'x'
     // tweak spring/offsets if you want
@@ -34,4 +34,4 @@ const AboutPage = ({ pages }: { pages: PageItem[] }) => {
   );
 };
 
-export default AboutPage;
+export default ArtPage;

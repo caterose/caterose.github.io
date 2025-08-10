@@ -9,16 +9,18 @@ import TVResponsive from '../../sections/tv-responsive/tv-responsive';
 import AboutPage from '../about-page/about-page';
 import ContactPage from '../contact-page/contact-page';
 import ExperiencePage from '../experience-page/experience-page';
-import ResumePage from '../resume-page/resume-page';
+import ResumePage from '../art-page/art-page';
 import { DilloApp } from '../../sections/project-page/dillo-app/dillo-app';
 import { MayfestSite } from '../../sections/project-page/mayfest-site/mayfest-site';
 import type { ProjectData } from '../project-page/project-page';
-import Hero from '../../sections/about-page/hero/hero';
 import Hello from '../../sections/about-page/hello/hello';
+import HeroSection from '../../sections/hero/hero';
 import type { PageItem } from '../../components/page-mapping/page-mapping';
 
 import './home.css';
 import GallerySection from '../../sections/about-page/gallery/gallery';
+import ArtPage from '../art-page/art-page';
+import PenDrawingGallery from '../../sections/about-page/bic-pen/bic-pen';
 
 interface HomePageProps {
   text: string;
@@ -26,13 +28,42 @@ interface HomePageProps {
 }
 
 const aboutItems: PageItem[] = [
+  // {
+  //   key: 'hero',
+  //   component: Hero,
+  //   props: {
+  //     bkgdImages: ['/hero/1.jpeg', '/hero/2.jpeg', '/hero/3.jpeg', '/hero/4.jpeg', '/hero/5.jpeg'],
+  //   },
+  //   // bg: 'var(--secondary-green)' // optional background behind the panel
+  // },
+
   {
     key: 'hero',
-    component: Hero,
+    component: PenDrawingGallery,
     props: {
-      bkgdImages: ['/hero/1.jpeg', '/hero/2.jpeg', '/hero/3.jpeg', '/hero/4.jpeg', '/hero/5.jpeg'],
+      images: [
+        'public/art/pen-drawings/1.jpeg',
+        'public/art/pen-drawings/2.jpeg',
+        'public/art/pen-drawings/3.jpeg',
+        'public/art/pen-drawings/4.jpeg',
+        'public/art/pen-drawings/5.jpeg',
+        'public/art/pen-drawings/6.jpeg',
+        'public/art/pen-drawings/7.jpeg',
+        'public/art/pen-drawings/8.jpeg',
+        'public/art/pen-drawings/9.jpeg',
+        'public/art/pen-drawings/10.jpeg',
+        'public/art/pen-drawings/11.jpeg',
+        'public/art/pen-drawings/12.jpeg',
+        'public/art/pen-drawings/13.jpeg',
+        'public/art/pen-drawings/14.jpeg',
+        'public/art/pen-drawings/15.jpeg',
+        'public/art/pen-drawings/16.jpeg',
+        'public/art/pen-drawings/17.jpeg',
+        'public/art/pen-drawings/18.jpeg',
+      ],
+      captions: ['caption1', 'caption2', 'caption3'],
     },
-    // bg: 'var(--secondary-green)' // optional background behind the panel
+    bg: 'var(--neutral-white)',
   },
   {
     key: 'hello',
@@ -50,7 +81,23 @@ const aboutItems: PageItem[] = [
     key: 'gallery',
     component: GallerySection,
     props: {
-      images: ['public/mayfest-website.png', 'public/phone2.jpeg', 'public/hero/5.jpeg'],
+      images: [
+        // 'public/gallery/artClass.jpeg',
+        // 'public/gallery/artInstitute.jpeg',
+        // 'public/gallery/DIY.jpeg',
+        // 'public/gallery/exploreChi.jpeg',
+        // 'public/gallery/firstSnow.jpeg',
+        // 'public/gallery/homeMeadow.jpeg',
+        // 'public/gallery/mkgee.jpeg',
+        // 'public/gallery/PA.jpeg',
+        // 'public/gallery/paintProgress.jpeg',
+        // 'public/gallery/ravyn.jpeg',
+        // 'public/gallery/skating.jpeg',
+        // 'public/gallery/tidepool.jpeg',
+        // 'public/gallery/tourism.jpeg',
+        // 'public/gallery/trevorNoah.jpeg',
+        // 'public/gallery/workingDillo.jpeg',
+      ],
       captions: ['caption1', 'caption2', 'caption3'],
     },
     bg: 'var(--neutral-white)',
@@ -107,6 +154,37 @@ export const projectItems: PageItem[] = [
   },
 ];
 
+const artItems: PageItem[] = [
+  {
+    key: 'hero',
+    component: HeroSection,
+    props: {
+      title: 'ART.',
+      images: [
+        'public/art/pen-drawings/1.jpeg',
+        'public/art/pen-drawings/2.jpeg',
+        'public/art/pen-drawings/3.jpeg',
+        'public/art/pen-drawings/4.jpeg',
+        'public/art/pen-drawings/5.jpeg',
+        'public/art/pen-drawings/6.jpeg',
+        'public/art/pen-drawings/7.jpeg',
+        'public/art/pen-drawings/8.jpeg',
+        'public/art/pen-drawings/9.jpeg',
+        'public/art/pen-drawings/10.jpeg',
+        'public/art/pen-drawings/11.jpeg',
+        'public/art/pen-drawings/12.jpeg',
+        'public/art/pen-drawings/13.jpeg',
+        'public/art/pen-drawings/14.jpeg',
+        'public/art/pen-drawings/15.jpeg',
+        'public/art/pen-drawings/16.jpeg',
+        'public/art/pen-drawings/17.jpeg',
+        'public/art/pen-drawings/18.jpeg',
+      ],
+    },
+    bg: 'var(--neutral-black)',
+  },
+];
+
 // const projects: ProjectData[] = [
 //   {
 //     type: 'dillo',
@@ -152,8 +230,8 @@ const COMPONENT_MAP = {
   about: <AboutPage pages={aboutItems} />,
   experience: <ExperiencePage />,
   projects: <ProjectPage projects={projectItems} />,
+  art: <ArtPage pages={artItems} />,
   contact: <ContactPage />,
-  resume: <ResumePage />,
 };
 
 const HomePage: React.FC<HomePageProps> = ({ text }: HomePageProps) => {

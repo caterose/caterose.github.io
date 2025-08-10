@@ -18,3 +18,19 @@
   pointer-events: none;
   text-align: center;
 }
+
+.name {
+  color: white;
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  z-index: 9999;
+  /* color: var(--primary-blue); */
+  font-family: var(--font-secondary);
+  font-style: italic;
+  pointer-events: none;
+  text-align: center;
+  font-size: 150px;
+  font-weight: 800;
+}

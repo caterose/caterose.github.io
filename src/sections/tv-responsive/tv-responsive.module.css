@@ -1,6 +1,6 @@
 @import url('../../index.css');
 
-.tv-div {
+.tvDiv {
   display: flex;
   flex-direction: row;
   margin: 40px auto 0 auto;
@@ -16,13 +16,13 @@
 
   /* border: 10px solid red; */
 }
-.tv-screen-outer,
-.tv-screen-inner,
-.tv-side-panel,
-.top-dials,
+.tvScreenOuter,
+.tvScreenInner,
+.tvSidePanel,
+.topDials,
 .dial,
-.mid-buttons,
-.grills-div,
+.midButtons,
+.grillsDiv,
 .grill {
   display: flex;
   flex-direction: column;
@@ -44,8 +44,9 @@
     border: 1px solid var(--primary-blue);
 } */
 
-.tv-screen-outer {
+.tvScreenOuter {
   border-radius: 20px;
+  background-color: var(--neutral-black);
   border: 1px solid var(--primary-blue);
   width: 80%;
   /* height: 700px; */
@@ -54,14 +55,18 @@
   box-sizing: border-box;
 }
 
-.tv-screen-inner {
+.tvScreenInner {
   /* Give it a concrete height or let the child control via aspect-ratio */
   /* Example: */
-  min-height: 600px;
+  /* min-height: 600px; */
   border: 1px solid var(--primary-blue);
   border-radius: 20px;
   overflow: hidden; /* keep content clipped */
   position: relative; /* anchor absolutely-positioned children */
+
+  /* ! MAYBE DELETE */
+  width: 100%;
+  height: 100%;
 
   /* border-radius: 20px;
   width: 100%;
@@ -71,14 +76,16 @@
   position: relative;  */
 }
 
-.tv-side-panel {
+.tvSidePanel {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
-  padding: 10px;
+  padding: 30px;
 
-  border: 1px solid var(--primary-blue);
+  /* border: 1px solid var(--primary-blue); */
+  border: 1px solid var(--neutral-white);
+  background-color: var(--neutral-black);
   width: 200px;
   min-height: 100%;
   border-radius: 10px;
@@ -86,7 +93,7 @@
   /* gap: 10px; */
 }
 
-.top-dials {
+.topDials {
   gap: 10px;
   margin-top: 20px;
   /* margin-bottom: 20px; */
@@ -96,40 +103,56 @@
   border-radius: 50%;
   width: 120px;
   height: 120px;
-  border: 1px solid var(--primary-blue);
+  border: 1px solid var(--neutral-white);
+  /* border: 1px solid var(--primary-blue); */
   display: flex;
   justify-content: center;
   align-items: center;
   /* background-color: var(--primary-blue); */
 }
 
-.dial .button-svg {
+.dial .buttonSvg {
   color: var(--primary-blue);
 }
 
-.mid-buttons-div {
+.midButtonsDiv {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   gap: 10px;
+  /* border: 2px solid red; */
+  width: 100%;
 }
 
-.mid-buttons {
+.midButtonsRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.midButtons {
   border: 1px solid var(--primary-blue);
   width: 50px;
   height: 20px;
   border-radius: 5px;
 }
 
-.grills-div {
-  gap: 7px;
+.icon {
+  width: 305px;
+  height: 305px;
+}
+
+.grillsDiv {
+  gap: 10px;
   margin-bottom: 20px;
 }
 
 .grill {
-  width: 110px;
-  height: 5px;
+  width: 125px;
+  /* width: 100%; */
+  height: 1px;
   border-radius: 5px;
-  border: 1px solid var(--primary-blue);
+  background-color: var(--neutral-white);
+  /* border: 1px solid var(--primary-blue); */
 }
 
 /* .tv {

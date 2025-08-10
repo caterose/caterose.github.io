@@ -56,8 +56,11 @@
 }
 
 .hello {
+  font-family: var(--font-secondary);
+  font-style: italic;
   font-size: 60px;
-  font-weight: 400;
+  /* font-weight: 400; */
+  font-weight: 800;
   color: var(--primary-blue);
   /* border: 2px solid red; */
   width: fit-content;
@@ -69,6 +72,7 @@
 }
 
 .subtitle {
+  font-family: var(--font-secondary);
   margin: 0;
   width: 100%;
   /* display: block; */
