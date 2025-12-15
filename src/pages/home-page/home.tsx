@@ -1,32 +1,21 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useSpring, animated } from '@react-spring/web';
-import { Parallax, ParallaxLayer } from '@react-spring/parallax';
+import { useSpring } from '@react-spring/web';
 import NavBar from '../../components/nav-bar/nav-bar';
-import WiggleText from '../../components/wiggle-text/wiggle-text';
-import ImageSwapSpring from '../../components/image-swap/image-swap';
 import ProjectPage from '../project-page/project-page';
 import TVResponsive from '../../sections/tv-responsive/tv-responsive';
 import AboutPage from '../about-page/about-page';
 import ContactPage from '../contact-page/contact-page';
 import ResearchPage from '../research-page/research-page';
-// import ResumePage from '../art-page/art-page';
-import { DilloApp } from '../../sections/project-page/dillo-app/dillo-app';
-import { MayfestSite } from '../../sections/project-page/mayfest-site/mayfest-site';
-import ChannelGuideSlide from '../../sections/project-page/channel-guide-slide/channel-guide-slide';
-import type { ProjectData } from '../project-page/project-page';
-import Hello from '../../sections/about-page/hello/hello';
-import HeroSection from '../../sections/hero/hero';
-import { HistoryResearch } from '../../sections/research-page/history-research/history-research';
-import { CSResearch } from '../../sections/research-page/cs-research/cs-research';
 import StaticTransition from '../../sections/transitions/static/static';
 import type { PageItem } from '../../components/page-mapping/page-mapping';
 
 import './home.css';
-import GallerySection from '../../sections/about-page/gallery/gallery';
 import ArtPage from '../art-page/art-page';
-import PenDrawingGallery from '../../sections/about-page/bic-pen/bic-pen';
 import { ProjectStandard } from '../../sections/project-page/project-standard/project-standard';
 import { GalleryStandard } from '../../sections/project-page/gallery-standard/gallery-standard';
+import PenDrawingGallery from '../../sections/about-page/bic-pen/bic-pen';
+import Hello from '../../sections/about-page/hello/hello';
+import HeroSection from '../../sections/hero/hero';
 
 interface HomePageProps {
   text: string;
@@ -365,7 +354,7 @@ const COMPONENT_MAP = {
   contact: <ContactPage />,
 };
 
-const HomePage: React.FC<HomePageProps> = ({ text }: HomePageProps) => {
+const HomePage: React.FC<HomePageProps> = () => {
   const [activePage, setActivePage] = useState<keyof typeof COMPONENT_MAP>('about');
   const [rotationCount, setRotationCount] = useState(0);
 
@@ -374,12 +363,14 @@ const HomePage: React.FC<HomePageProps> = ({ text }: HomePageProps) => {
   const [staticKey, setStaticKey] = useState(0); // to restart the animation on each switch
   const hideTimer = useRef<number | null>(null);
 
-  const rotationStyles = useSpring({
+  useSpring({
     transform: `rotate(${rotationCount * 45}deg)`,
     config: { tension: 200, friction: 30 },
   });
 
-  const handleNavigate = (page: keyof typeof COMPONENT_MAP) => {
+  const handleNavigate = (pageKey: string) => {
+    const page = pageKey as keyof typeof COMPONENT_MAP;
+    if (!(page in COMPONENT_MAP)) return;
     // show overlay and change page
     setShowStatic(true);
     setStaticKey((k) => k + 1); // remount StaticTransition to replay animation

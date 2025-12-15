@@ -155,7 +155,7 @@ export const ProjectStandard: React.FC<ProjectStandardProps> = ({
                   onClick={() => handleImageClick(image, imgIdx)}
                   onMouseEnter={() => setCursor({ active: true })}
                   onMouseLeave={() => setCursor({ active: false })}
-                  onError={(e) => {
+                  onError={() => {
                     console.error('Image failed to load:', image);
                   }}
                   onLoad={() => console.log('Image loaded successfully:', image)}
@@ -203,7 +203,7 @@ export const ProjectStandard: React.FC<ProjectStandardProps> = ({
             >
               <CloseIcon />
             </button>
-            {images.length > 1 && (
+            {images && images.length > 1 && (
               <>
                 <button
                   className={`${styles.imageModalNav} ${styles.imageModalPrev}`}
@@ -234,7 +234,7 @@ export const ProjectStandard: React.FC<ProjectStandardProps> = ({
               alt="Full size project image"
               className={styles.imageModalImage}
             />
-            {images.length > 1 && (
+            {images && images.length > 1 && (
               <div className={styles.imageModalDots}>
                 {images.map((_, dotIdx) => (
                   <div

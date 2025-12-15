@@ -1,8 +1,7 @@
-import React, { useState, useMemo, useEffect, useRef, useContext } from 'react';
+import { useState, useMemo, useEffect, useRef, useContext } from 'react';
 import { useProjectContext } from '../../../contexts/project-context';
 import { CursorContext } from '../../../context/cursor-context';
 import type { PageItem } from '../../../components/page-mapping/page-mapping';
-import NodeDescription from '../../../components/node-description/node-description';
 import styles from './channel-guide-slide.module.css';
 
 interface ChannelGuideSlideProps {
@@ -16,7 +15,7 @@ interface CategorizedProject extends PageItem {
 }
 
 const ChannelGuideSlide: React.FC<ChannelGuideSlideProps> = () => {
-  const { projects, activeIndex, goTo } = useProjectContext();
+  const { projects, activeIndex } = useProjectContext();
   const [, setCursor] = useContext(CursorContext);
   const [selectedSkills, setSelectedSkills] = useState<Set<string>>(new Set());
   const [expandedProject, setExpandedProject] = useState<string | null>(null);
@@ -95,14 +94,17 @@ const ChannelGuideSlide: React.FC<ChannelGuideSlideProps> = () => {
   };
 
   const handleProjectClick = (project: CategorizedProject) => {
-    if (expandedProject === project.key) {
+    const projectKey = project.key ? String(project.key) : null;
+    if (!projectKey) return;
+
+    if (expandedProject === projectKey) {
       setExpandedProject(null);
       setSkillsExpanded(true); // Expand skills when project is collapsed
     } else {
-      setExpandedProject(project.key);
+      setExpandedProject(projectKey);
       setSkillsExpanded(false); // Collapse skills when project is expanded
-      if (!currentImageIndex[project.key]) {
-        setCurrentImageIndex((prev) => ({ ...prev, [project.key]: 0 }));
+      if (!currentImageIndex[projectKey]) {
+        setCurrentImageIndex((prev) => ({ ...prev, [projectKey]: 0 }));
       }
     }
   };
@@ -159,7 +161,9 @@ const ChannelGuideSlide: React.FC<ChannelGuideSlideProps> = () => {
   useEffect(() => {
     if (!selectedImage || !expandedProject) return;
 
-    const currentProject = sortedProjects.find((p) => p.key === expandedProject);
+    const currentProject = sortedProjects.find(
+      (p) => (p.key ? String(p.key) : null) === expandedProject,
+    );
     const images = currentProject?.props?.images || [];
     if (images.length <= 1) return;
 
@@ -235,10 +239,11 @@ const ChannelGuideSlide: React.FC<ChannelGuideSlideProps> = () => {
       <div className={styles.timelineContainer}>
         <div className={styles.timeline} ref={timelineRef}>
           {sortedProjects.map((project, idx) => {
+            const projectKey = project.key ? String(project.key) : `project-${idx}`;
             const actualIndex = projects.findIndex((p) => p.key === project.key);
             const isActive = actualIndex === activeIndex;
 
-            const isExpanded = expandedProject === project.key;
+            const isExpanded = expandedProject === projectKey;
 
             return (
               <div
@@ -254,12 +259,12 @@ const ChannelGuideSlide: React.FC<ChannelGuideSlideProps> = () => {
                     <h4 className={styles.projectTitle}>{project.props?.title || 'Untitled'}</h4>
                     {project.props?.job && <p className={styles.projectJob}>{project.props.job}</p>}
                     {project.date && <span className={styles.projectDate}>{project.date}</span>}
-                    {isExpanded && (
+                    {isExpanded && project.props && (
                       <div className={styles.expandedContent}>
-                        {project.props?.description && (
+                        {project.props.description && (
                           <p className={styles.projectDescription}>{project.props.description}</p>
                         )}
-                        {project.props?.images && project.props.images.length > 0 && (
+                        {project.props.images && project.props.images.length > 0 && (
                           <div className={styles.projectImagesContainer}>
                             <div
                               className={styles.projectImages}
@@ -268,17 +273,18 @@ const ChannelGuideSlide: React.FC<ChannelGuideSlideProps> = () => {
                                 const scrollLeft = container.scrollLeft;
                                 const imageWidth = 120 + 12; // image width + gap
                                 const newIndex = Math.round(scrollLeft / imageWidth);
-                                const currentIdx = getCurrentImageIndex(project.key);
+                                const currentIdx = getCurrentImageIndex(projectKey);
                                 if (
                                   newIndex !== currentIdx &&
                                   newIndex >= 0 &&
+                                  project.props &&
                                   newIndex < project.props.images.length
                                 ) {
-                                  setImageIndex(project.key, newIndex);
+                                  setImageIndex(projectKey, newIndex);
                                 }
                               }}
                             >
-                              {project.props.images.map((image, imgIdx) => (
+                              {project.props.images.map((image: string, imgIdx: number) => (
                                 <img
                                   key={imgIdx}
                                   src={image}
@@ -286,7 +292,7 @@ const ChannelGuideSlide: React.FC<ChannelGuideSlideProps> = () => {
                                   className={styles.projectImage}
                                   onClick={(e) => {
                                     e.stopPropagation();
-                                    setImageIndex(project.key, imgIdx);
+                                    setImageIndex(projectKey, imgIdx);
                                     setSelectedImage(image);
                                   }}
                                   onMouseEnter={() => setCursor({ active: true })}
@@ -296,8 +302,8 @@ const ChannelGuideSlide: React.FC<ChannelGuideSlideProps> = () => {
                             </div>
                             {project.props.images.length > 1 && (
                               <div className={styles.imageDots}>
-                                {project.props.images.map((_, dotIdx) => {
-                                  const currentIdx = getCurrentImageIndex(project.key);
+                                {project.props.images.map((_: string, dotIdx: number) => {
+                                  const currentIdx = getCurrentImageIndex(projectKey);
                                   return (
                                     <div
                                       key={dotIdx}
@@ -312,7 +318,7 @@ const ChannelGuideSlide: React.FC<ChannelGuideSlideProps> = () => {
                                             left: dotIdx * imageWidth,
                                             behavior: 'smooth',
                                           });
-                                          setImageIndex(project.key, dotIdx);
+                                          setImageIndex(projectKey, dotIdx);
                                         }
                                       }}
                                       onMouseEnter={() => setCursor({ active: true })}
@@ -324,9 +330,9 @@ const ChannelGuideSlide: React.FC<ChannelGuideSlideProps> = () => {
                             )}
                           </div>
                         )}
-                        {project.props?.nodes && project.props.nodes.length > 0 && (
+                        {project.props.nodes && project.props.nodes.length > 0 && (
                           <div className={styles.projectNodes}>
-                            {project.props.nodes.map((node, nodeIdx) => (
+                            {project.props.nodes.map((node: string, nodeIdx: number) => (
                               <span key={nodeIdx} className={styles.projectNode}>
                                 {node}
                               </span>
@@ -346,7 +352,9 @@ const ChannelGuideSlide: React.FC<ChannelGuideSlideProps> = () => {
       {selectedImage &&
         expandedProject &&
         (() => {
-          const currentProject = sortedProjects.find((p) => p.key === expandedProject);
+          const currentProject = sortedProjects.find(
+            (p) => (p.key ? String(p.key) : null) === expandedProject,
+          );
           const images = currentProject?.props?.images || [];
           const currentIdx = getCurrentImageIndex(expandedProject);
 
@@ -375,7 +383,7 @@ const ChannelGuideSlide: React.FC<ChannelGuideSlideProps> = () => {
                 />
                 {images.length > 1 && (
                   <div className={styles.imageModalDots}>
-                    {images.map((_, dotIdx) => (
+                    {images.map((_: string, dotIdx: number) => (
                       <div
                         key={dotIdx}
                         className={`${styles.imageModalDot} ${dotIdx === currentIdx ? styles.active : ''}`}

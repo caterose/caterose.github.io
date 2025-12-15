@@ -1,5 +1,4 @@
-import React, { useContext } from 'react';
-import OpenInNewIcon from '@mui/icons-material/OpenInNew';
+import { useContext } from 'react';
 import EmailIcon from '@mui/icons-material/Email';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import { CursorContext } from '../../../context/cursor-context';
@@ -17,11 +16,9 @@ interface ContactStandardProps {
 
 export const ContactStandard: React.FC<ContactStandardProps> = ({
   title,
-  subtitle,
   description,
   email,
   linkedin,
-  otherLinks,
   nodes,
 }: ContactStandardProps) => {
   const [, setCursor] = useContext(CursorContext);

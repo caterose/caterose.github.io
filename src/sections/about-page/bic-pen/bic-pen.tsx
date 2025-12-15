@@ -23,10 +23,11 @@ interface Item {
   caption?: string;
 }
 
-const pickUrl = (images: string[], size: number) => {
+const pickUrl = (images: string[]) => {
   if (images && images.length) {
     return images[ri(0, images.length - 1)];
   }
+  return undefined;
 };
 
 const PenDrawingGallery: React.FC<PenDrawingGalleryProps> = ({
@@ -59,9 +60,10 @@ const PenDrawingGallery: React.FC<PenDrawingGalleryProps> = ({
     // Allow images to extend to edges and slightly beyond for full screen coverage
     const maxX = dims.w;
     const maxY = dims.h;
-    const idx = ri(0, images.length - 1);
-    const url = pickUrl(images, size);
+    const url = pickUrl(images);
     // const caption = captions[idx] || '';
+
+    if (!url) return;
 
     const it: Item = {
       id: crypto.randomUUID(),
@@ -171,15 +173,15 @@ const PenDrawingGallery: React.FC<PenDrawingGalleryProps> = ({
                       transform: `translate3d(0, -12px, 0) scale(0.92) rotate(${it.rotate - 8}deg)`,
                       opacity: 0,
                     },
-                    { 
-                      transform: `translate3d(0, 0, 0) scale(1) rotate(${it.rotate}deg)`, 
-                      opacity: 1 
+                    {
+                      transform: `translate3d(0, 0, 0) scale(1) rotate(${it.rotate}deg)`,
+                      opacity: 1,
                     },
                   ],
-                  { 
-                    duration: 300, 
+                  {
+                    duration: 300,
                     easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
-                    fill: 'forwards'
+                    fill: 'forwards',
                   },
                 ).onfinish = () => {
                   // Update inline style after animation completes to prevent conflicts

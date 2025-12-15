@@ -9,15 +9,15 @@ export interface PageItem {
   key?: React.Key;
 }
 
-type TransitionsFn = ReturnType<typeof import('@react-spring/web').useTransition>;
+import type { TransitionFn } from '@react-spring/web';
 
 interface PageMappingProps {
-  transitions: TransitionsFn; // <-- function, not array
+  transitions: TransitionFn<number, any>;
   items: PageItem[];
 }
 
 const PageMapping: React.FC<PageMappingProps> = ({ transitions, items }) => {
-  return transitions((style, i) => {
+  return transitions((style: any, i: number) => {
     const it = items[i];
     if (!it) return null;
 

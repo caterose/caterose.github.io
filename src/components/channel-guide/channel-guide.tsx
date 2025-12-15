@@ -20,12 +20,12 @@ interface CategorizedProject extends PageItem {
 const ChannelGuide: React.FC<ChannelGuideProps> = ({ projects, onSelectProject, activeIndex }) => {
   const [, setCursor] = useContext(CursorContext);
   const [selectedChannel, setSelectedChannel] = useState<ProjectCategory>('All');
-  const [selectedProject, setSelectedProject] = useState<number | null>(null);
+  const [, setSelectedProject] = useState<number | null>(null);
 
   // Categorize projects (you can add category to your project items later)
   const categorizeProjects = (): CategorizedProject[] => {
     const nonHeroProjects = projects.filter((p) => p.key !== 'hero');
-    return nonHeroProjects.map((project, index) => {
+    return nonHeroProjects.map((project) => {
       // Auto-categorize based on title/content
       let category: ProjectCategory = 'CS';
       const title = project.props?.title?.toLowerCase() || '';

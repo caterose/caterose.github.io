@@ -18,7 +18,6 @@ const pages = [
 
 const WiggleLink: React.FC<{ label: string; pageKey: string; onClick: () => void }> = ({
   label,
-  pageKey,
   onClick,
 }) => {
   const [, setCursor] = useContext(CursorContext);

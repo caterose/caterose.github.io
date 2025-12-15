@@ -1,5 +1,3 @@
-import React from 'react';
-import ImageSwapSpring from '../../../components/image-swap/image-swap';
 import NodeDescription from '../../../components/node-description/node-description';
 import styles from './history-research.module.css';
 

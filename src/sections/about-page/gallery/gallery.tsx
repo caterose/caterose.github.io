@@ -23,10 +23,11 @@ interface Item {
   caption?: string;
 }
 
-const pickUrl = (images: string[], size: number) => {
+const pickUrl = (images: string[]) => {
   if (images && images.length) {
     return images[ri(0, images.length - 1)];
   }
+  return undefined;
 };
 
 const GallerySection: React.FC<GallerySectionProps> = ({
@@ -59,8 +60,10 @@ const GallerySection: React.FC<GallerySectionProps> = ({
     const maxX = Math.max(0, dims.w - size);
     const maxY = Math.max(0, dims.h - size);
     const idx = ri(0, images.length - 1);
-    const url = pickUrl(images, size);
+    const url = pickUrl(images);
     const caption = captions[idx] || '';
+
+    if (!url) return;
 
     const it: Item = {
       id: crypto.randomUUID(),

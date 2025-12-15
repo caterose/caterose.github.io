@@ -136,7 +136,7 @@ export const GalleryStandard: React.FC<GalleryStandardProps> = ({
                   onClick={() => handleImageClick(image, imgIdx)}
                   onMouseEnter={() => setCursor({ active: true })}
                   onMouseLeave={() => setCursor({ active: false })}
-                  onError={(e) => {
+                  onError={() => {
                     console.error('Image failed to load:', image);
                   }}
                   onLoad={() => console.log('Image loaded successfully:', image)}

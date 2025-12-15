@@ -1,12 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useTransition } from '@react-spring/web';
 import PageMapping from '../../components/page-mapping/page-mapping';
 import type { PageItem } from '../../components/page-mapping/page-mapping';
 import styles from './about-page.module.css';
-
-interface AboutProps {
-  pages: PageItem[];
-}
 
 const AboutPage = ({ pages }: { pages: PageItem[] }) => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -41,7 +37,7 @@ const AboutPage = ({ pages }: { pages: PageItem[] }) => {
     <div className={styles.navProjects}>
       <div className={styles.projectContent}>
         <div className={styles.projectNav}>
-          {pages.map((page, i) => (
+          {pages.map((_, i) => (
             <div
               key={i}
               className={`${styles.navDot} ${i === activeIndex ? styles.active : ''} ${pages[activeIndex].bg === 'var(--neutral-white)' ? styles.inverseDot : ''}`}

@@ -1,4 +1,4 @@
-import React, { useRef, useContext } from 'react';
+import { useRef, useContext } from 'react';
 import InfoBox from '../info-box/info-box';
 import type { InfoBoxProps } from '../info-box/info-box'; // ✅ FIXED
 

@@ -1,5 +1,5 @@
 import { useState, useContext } from 'react';
-import { useIndexTransition } from '../../hooks/use-index-transition';
+import { useTransition } from '@react-spring/web';
 import PageMapping from '../../components/page-mapping/page-mapping';
 import ChannelGuide from '../../components/channel-guide/channel-guide';
 import { CursorContext } from '../../context/cursor-context';
@@ -12,7 +12,19 @@ interface ProjectPageWithGuideProps {
 
 const ProjectPageWithGuide: React.FC<ProjectPageWithGuideProps> = ({ projects }) => {
   const [, setCursor] = useContext(CursorContext);
-  const { transitions, activeIndex, goTo } = useIndexTransition(projects.length);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const transitions = useTransition(activeIndex, {
+    key: activeIndex,
+    from: { opacity: 0 },
+    enter: { opacity: 1 },
+    leave: { opacity: 0 },
+    config: { mass: 1, tension: 200, friction: 30 },
+  });
+
+  const goTo = (index: number) => {
+    setActiveIndex(index);
+  };
   const [showGuide, setShowGuide] = useState(true);
 
   const handleSelectProject = (index: number) => {

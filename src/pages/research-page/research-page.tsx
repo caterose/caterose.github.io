@@ -41,7 +41,7 @@ const ResearchPage = ({ pages }: { pages: PageItem[] }) => {
     <div className={styles.navProjects}>
       <div className={styles.projectContent}>
         <div className={styles.projectNav}>
-          {pages.map((page, i) => (
+          {pages.map((_, i) => (
             <div
               key={i}
               className={`${styles.navDot} ${i === activeIndex ? styles.active : ''} ${pages[activeIndex].bg === 'var(--neutral-white)' ? styles.inverseDot : ''}`}

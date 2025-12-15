@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import { useState, useContext } from 'react';
 // import { SvgIconProps } from "@mui/material/SvgIcon";
 import { useIsMobile } from '../../hooks/use-is-mobile';
 import { CursorContext } from '../../context/cursor-context';
