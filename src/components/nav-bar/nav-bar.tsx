@@ -1,19 +1,19 @@
-import React, { useContext, useCallback, useState } from "react";
-import { CursorContext } from "../../context/cursor-context";
-import { useSpring, animated } from "@react-spring/web";
+import React, { useContext, useCallback, useState } from 'react';
+import { CursorContext } from '../../context/cursor-context';
+import { useSpring, animated } from '@react-spring/web';
 
-import "./nav-bar.css";
+import './nav-bar.css';
 
 interface NavBarProps {
   onNavigate: (pageKey: string) => void;
 }
 
 const pages = [
-  { label: "about.", key: "about" },
-  { label: "experience.", key: "experience" },
-  { label: "projects.", key: "projects" },
-  { label: "contact.", key: "contact" },
-  { label: "resume.", key: "resume" },
+  { label: 'ABOUT.', key: 'about' },
+  { label: 'RESEARCH.', key: 'research' },
+  { label: 'PROJECTS.', key: 'projects' },
+  { label: 'ART.', key: 'art' },
+  { label: 'CONTACT.', key: 'contact' },
 ];
 
 const WiggleLink: React.FC<{ label: string; pageKey: string; onClick: () => void }> = ({
@@ -57,9 +57,7 @@ const WiggleLink: React.FC<{ label: string; pageKey: string; onClick: () => void
       onMouseLeave={deactivateCursor}
       onClick={onClick}
     >
-      <animated.span style={{ display: "inline-block", ...styles }}>
-        {label}
-      </animated.span>
+      <animated.span style={{ display: 'inline-block', ...styles }}>{label}</animated.span>
     </div>
   );
 };
@@ -75,7 +73,6 @@ const NavBar: React.FC<NavBarProps> = ({ onNavigate }) => {
 };
 
 export default NavBar;
-
 
 // import React, { useContext, useCallback, useState } from "react";
 // import { CursorContext } from "../../context/cursor-context";

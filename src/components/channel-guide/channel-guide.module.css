@@ -1,0 +1,238 @@
+@import url('../../index.css');
+
+.channelGuide {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 40px;
+  box-sizing: border-box;
+  overflow-y: auto;
+  color: var(--neutral-white);
+  font-family: var(--font-secondary);
+}
+
+.guideTitle {
+  font-size: 24px;
+  font-weight: 800;
+  font-style: italic;
+  margin: 0 0 30px 0;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.channelSelector {
+  margin-bottom: 40px;
+}
+
+.channels {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.channelButton {
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  color: var(--neutral-white);
+  padding: 16px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  font-family: var(--font-secondary);
+}
+
+.channelButton:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-2px);
+}
+
+.channelButton.active {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: var(--neutral-white);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+}
+
+.channelNumber {
+  font-size: 12px;
+  font-weight: 600;
+  opacity: 0.8;
+  letter-spacing: 1px;
+}
+
+.channelName {
+  font-size: 18px;
+  font-weight: 700;
+  font-style: italic;
+}
+
+.timelineContainer {
+  flex: 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.timelineTitle {
+  font-size: 20px;
+  font-weight: 700;
+  font-style: italic;
+  margin: 0 0 20px 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  flex-shrink: 0;
+}
+
+.timeline {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 40px 20px 20px 20px;
+  gap: 20px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+  -webkit-overflow-scrolling: touch;
+}
+
+.timeline::-webkit-scrollbar {
+  height: 8px;
+}
+
+.timeline::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+}
+
+.timeline::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+}
+
+.timeline::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  top: 48px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.3);
+  z-index: 0;
+}
+
+.timelineItem {
+  position: relative;
+  flex-shrink: 0;
+  width: 280px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.timelineItem:hover {
+  transform: translateY(-8px);
+}
+
+.timelineItem.active .timelineDot {
+  background: var(--neutral-white);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+  transform: scale(1.3);
+}
+
+.timelineItem.active .projectCard {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: var(--neutral-white);
+}
+
+.timelineDot {
+  position: relative;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  border: 2px solid var(--neutral-white);
+  transition: all 0.3s ease;
+  z-index: 1;
+  margin-bottom: 12px;
+  flex-shrink: 0;
+}
+
+.timelineContent {
+  width: 100%;
+  margin-top: 0;
+}
+
+.projectCard {
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 20px;
+  transition: all 0.3s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.projectCard:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.projectTitle {
+  font-size: 18px;
+  font-weight: 700;
+  font-style: italic;
+  margin: 0 0 8px 0;
+  color: var(--neutral-white);
+}
+
+.projectJob {
+  font-size: 14px;
+  font-weight: 400;
+  margin: 0 0 8px 0;
+  opacity: 0.8;
+  font-style: italic;
+}
+
+.projectDate {
+  font-size: 12px;
+  opacity: 0.6;
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.projectDescription {
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 8px 0 0 0;
+  opacity: 0.7;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .channelGuide {
+    padding: 20px;
+  }
+
+  .channels {
+    flex-direction: column;
+  }
+
+  .channelButton {
+    width: 100%;
+  }
+}
+

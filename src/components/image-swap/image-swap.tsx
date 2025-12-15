@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
-import { useSpring, animated } from "@react-spring/web";
-import "./image-swap.css";
+import { useState, useEffect, useContext } from 'react';
+import { useSpring, animated } from '@react-spring/web';
+import { CursorContext } from '../../context/cursor-context';
+import './image-swap.css';
 
 interface Images {
   image1: string;
@@ -8,12 +9,13 @@ interface Images {
 }
 
 const ImageSwapSpring: React.FC<Images> = ({ image1, image2 }: Images) => {
+  const [, setCursor] = useContext(CursorContext);
   const [flipped, setFlipped] = useState(false);
-  const [zIndexTop, setZIndexTop] = useState<"img1" | "img2">("img1");
+  const [zIndexTop, setZIndexTop] = useState<'img1' | 'img2'>('img1');
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      setZIndexTop(flipped ? "img2" : "img1");
+      setZIndexTop(flipped ? 'img2' : 'img1');
     }, 100);
 
     return () => clearTimeout(timeout);
@@ -22,12 +24,12 @@ const ImageSwapSpring: React.FC<Images> = ({ image1, image2 }: Images) => {
   const commonConfig = { tension: 200, friction: 20 };
 
   const img1Spring = useSpring({
-    transform: flipped ? "scale(1)" : "scale(1.05)",
+    transform: flipped ? 'scale(1)' : 'scale(1.05)',
     config: commonConfig,
   });
 
   const img2Spring = useSpring({
-    transform: flipped ? "scale(1.05)" : "scale(1)",
+    transform: flipped ? 'scale(1.05)' : 'scale(1)',
     config: commonConfig,
   });
 
@@ -35,6 +37,8 @@ const ImageSwapSpring: React.FC<Images> = ({ image1, image2 }: Images) => {
     <div
       className="image-container"
       onClick={() => setFlipped((prev) => !prev)}
+      onMouseEnter={() => setCursor({ active: true })}
+      onMouseLeave={() => setCursor({ active: false })}
     >
       <div className="images">
         <animated.img
@@ -42,7 +46,7 @@ const ImageSwapSpring: React.FC<Images> = ({ image1, image2 }: Images) => {
           className="image image1"
           style={{
             ...img1Spring,
-            zIndex: zIndexTop === "img1" ? 2 : 1,
+            zIndex: zIndexTop === 'img1' ? 2 : 1,
           }}
           alt="Image 1"
         />
@@ -51,7 +55,7 @@ const ImageSwapSpring: React.FC<Images> = ({ image1, image2 }: Images) => {
           className="image image2"
           style={{
             ...img2Spring,
-            zIndex: zIndexTop === "img2" ? 2 : 1,
+            zIndex: zIndexTop === 'img2' ? 2 : 1,
           }}
           alt="Image 2"
         />

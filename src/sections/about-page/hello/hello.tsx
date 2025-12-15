@@ -23,14 +23,15 @@ const Hello: React.FC<HelloProps> = ({ interests }: HelloProps) => {
         <div className={styles.helloDiv}>
           <div className={styles.title}>
             <h1 ref={helloRef} className={styles.hello}>
-              hi! my name is <span>cate rose.</span>
+              HI. I'M <span>CATE ROSE.</span>
             </h1>
             <h3 className={styles.subtitle}>(programmer, historian, artist, nerd) </h3>
 
             <p className={styles.background} style={helloWidth ? { width: helloWidth } : undefined}>
-              I’m from San Francisco, Toronto, and Evanston, IL! I’m a double major at Northwestern
-              University studying Computer Science and Global history but, as you can see below, I
-              have a lot of interests :)
+              I'm a graduating senior at Northwestern University, studying computer science and
+              global history. Professionally, I'm a passionate human-centered designer, with a focus
+              on how digital systems can better foster meaningful communication and connection. As
+              you can see below, I have lots of different interests :)
             </p>
           </div>
         </div>

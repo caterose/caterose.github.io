@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useSpring, animated } from '@react-spring/web';
 import { Parallax, ParallaxLayer } from '@react-spring/parallax';
 import NavBar from '../../components/nav-bar/nav-bar';
@@ -8,247 +8,413 @@ import ProjectPage from '../project-page/project-page';
 import TVResponsive from '../../sections/tv-responsive/tv-responsive';
 import AboutPage from '../about-page/about-page';
 import ContactPage from '../contact-page/contact-page';
-import ExperiencePage from '../experience-page/experience-page';
-import ResumePage from '../resume-page/resume-page';
+import ResearchPage from '../research-page/research-page';
+// import ResumePage from '../art-page/art-page';
 import { DilloApp } from '../../sections/project-page/dillo-app/dillo-app';
 import { MayfestSite } from '../../sections/project-page/mayfest-site/mayfest-site';
+import ChannelGuideSlide from '../../sections/project-page/channel-guide-slide/channel-guide-slide';
 import type { ProjectData } from '../project-page/project-page';
-import Hero from '../../sections/about-page/hero/hero';
 import Hello from '../../sections/about-page/hello/hello';
+import HeroSection from '../../sections/hero/hero';
+import { HistoryResearch } from '../../sections/research-page/history-research/history-research';
+import { CSResearch } from '../../sections/research-page/cs-research/cs-research';
+import StaticTransition from '../../sections/transitions/static/static';
 import type { PageItem } from '../../components/page-mapping/page-mapping';
 
 import './home.css';
 import GallerySection from '../../sections/about-page/gallery/gallery';
+import ArtPage from '../art-page/art-page';
+import PenDrawingGallery from '../../sections/about-page/bic-pen/bic-pen';
+import { ProjectStandard } from '../../sections/project-page/project-standard/project-standard';
+import { GalleryStandard } from '../../sections/project-page/gallery-standard/gallery-standard';
 
 interface HomePageProps {
   text: string;
-  // ADD IN
 }
 
 const aboutItems: PageItem[] = [
   {
     key: 'hero',
-    component: Hero,
+    component: PenDrawingGallery,
     props: {
-      bkgdImages: ['/hero/1.jpeg', '/hero/2.jpeg', '/hero/3.jpeg', '/hero/4.jpeg', '/hero/5.jpeg'],
+      images: [
+        '/art/pen-drawings/1.jpeg',
+        '/art/pen-drawings/2.jpeg',
+        '/art/pen-drawings/3.jpeg',
+        '/art/pen-drawings/4.jpeg',
+        '/art/pen-drawings/5.jpeg',
+        '/art/pen-drawings/6.jpeg',
+        '/art/pen-drawings/7.jpeg',
+        '/art/pen-drawings/8.jpeg',
+        '/art/pen-drawings/9.jpeg',
+        '/art/pen-drawings/10.jpeg',
+        '/art/pen-drawings/11.jpeg',
+        '/art/pen-drawings/12.jpeg',
+        '/art/pen-drawings/13.jpeg',
+        '/art/pen-drawings/14.jpeg',
+        '/art/pen-drawings/15.jpeg',
+        '/art/pen-drawings/16.jpeg',
+        '/art/pen-drawings/17.jpeg',
+        '/art/pen-drawings/18.jpeg',
+        '/art/pen-drawings/19.jpeg',
+      ],
+      // captions: ['caption1', 'caption2', 'caption3'],
     },
-    // bg: 'var(--secondary-green)' // optional background behind the panel
+    bg: 'var(--neutral-white)',
   },
   {
     key: 'hello',
     component: Hello,
     props: {
       interests: [
-        ['interest1', 'interest2', 'interest3', 'interest4', 'interest5'],
-        ['interest1', 'interest2', 'interest3', 'interest4', 'interest5'],
-        ['interest1', 'interest2', 'interest3', 'interest4', 'interest5'],
+        [
+          'Human-Centered Design',
+          'JavaScript',
+          'Accessibility',
+          'Python',
+          'History of Technology',
+          'TypeScript',
+          'Responsible AI',
+        ],
+        [
+          'Figma',
+          'Visual Art',
+          'Machine Learning',
+          'Human–Computer Interaction',
+          'Student Mentorship',
+          'Music & Community',
+          'Design Systems',
+        ],
       ],
-    },
-    bg: 'var(--neutral-white)', // optional background behind the panel
-  },
-  {
-    key: 'gallery',
-    component: GallerySection,
-    props: {
-      images: ['public/mayfest-website.png', 'public/phone2.jpeg', 'public/hero/5.jpeg'],
-      captions: ['caption1', 'caption2', 'caption3'],
     },
     bg: 'var(--neutral-white)',
   },
-  // you can add more pages below (any components)
 ];
 
-// import { DilloApp } from '../../sections/project-page/dillo-app/dillo-app';
-// import { MayfestSite } from '../../sections/project-page/mayfest-site/mayfest-site';
-// import type { PageItem } from './PageMapping';
+// ! =============
 
-export const projectItems: PageItem[] = [
+const researchItems: PageItem[] = [
   {
-    key: 'dillo-app',
-    component: DilloApp,
+    key: 'hero',
+    component: HeroSection,
     props: {
-      title: 'Dillo Day: Mobile Application',
-      job: 'Co-director of Technology, Lead UI/UX and Graphics Designer, Front-end Engineer',
-      description:
-        'Mobile application for the Dillo Day festival, attended by over 12,000 participants every year in Evanston, IL. App includes artist lineups, real-time announcements, a festival map, a Spotify integration feature (‘Find Your Cabin Mate’), and a contact section.',
-      images: ['/phone.png', '/phone2.jpeg'],
-      nodes: ['X', 'XX'],
-      link: '',
+      title: 'RESEARCH.',
+      images: [],
     },
-    bg: 'var(--secondary-green)',
+    bg: 'var(--neutral-black)',
   },
   {
-    key: 'mayfest-site',
-    component: MayfestSite,
+    key: 'history-research',
+    component: ProjectStandard,
     props: {
-      title: 'Mayfest Productions: Website',
-      job: '',
+      title: 'Leopold Research Fellow',
+      job: 'Prof. Daniel Immerwahr, Northwestern Department of History',
       description:
-        'Website for Mayfest Productions, the Northwestern Student organization that organizes and runs the annual Dillo Day music festival, amongst other events. Information includes an organization overview, information about the team, upcoming events, and more.',
-      images: ['mayfest-website.png'],
-      nodes: ['X', 'XX'],
+        "Researching fire and capitalism in American history for US Foreign Relations expert Prof. Daniel Immerwahr's upcoming book and writing research reports to summarize key findings. Revised the Past & Present journal article 'All That is Solid Bursts into Flame: Capitalism and Fire in the Nineteenth-Century United States' and the New Yorker article 'Beyond the Myth of Rural America'",
+      images: ['/research/rural-america.png'],
+      nodes: ['Archival Research', 'Research Synthesis', 'Scholarly Writing', 'Editorial Revision'],
       link: '',
+      otherLinks: [
+        {
+          label:
+            'All That is Solid Bursts into Flame: Capitalism and Fire in the Nineteenth-Century United States',
+          url: 'https://faculty.wcas.northwestern.edu/daniel-immerwahr/Immerwahr_Capitalism_Fire.pdf',
+        },
+        {
+          label: 'Beyond the Myth of Rural America',
+          url: 'https://www.newyorker.com/magazine/2023/10/23/beyond-the-myth-of-rural-america',
+        },
+      ],
+      date: '2024',
     },
-    bg: 'var(--secondary-green)',
+    bg: 'var(--neutral-white)',
+  },
+  {
+    key: 'cs-research',
+    component: ProjectStandard,
+    props: {
+      title: 'AI Student Researcher',
+      job: 'Prof. Mohammed Alam, Northwestern Department of Computer Science',
+      description: [
+        "With Prof. Mohammed Alam (Deputy Director of Northwestern MS in AI), I’m building TechnoPsychology—a research project at the intersection of computation and cognitive science. Using Python tooling and LLM APIs, we're studying the structuring of knowledge within large language models, focusing on how these systems store, retrieve, and combine information. The work aims to make AI interactions more understandable and empowering for users.",
+      ],
+      images: [],
+      nodes: ['Python', 'OpenAI API', 'AI'],
+    },
+    bg: 'var(--neutral-white)',
+  },
+];
+
+// ! =============
+
+const projectItems: PageItem[] = [
+  {
+    key: 'hero',
+    component: HeroSection,
+    props: {
+      title: 'PROJECTS.',
+      images: [],
+    },
+    bg: 'var(--neutral-black)',
+  },
+  {
+    key: 'edtech-startup',
+    component: ProjectStandard,
+    props: {
+      title: 'Stealth Startup (EdTech): Redesigning the Internship Process',
+      job: 'Design & Development Lead',
+      description:
+        "Lead UI/UX design and front-end development for the startup's MVP (web platform), focused on aiding workforce augmentation through crowd-sourced problem solving. Responsibilities included creating a comprehensive design system in Figma to support accessibility and responsiveness and building/implementing a reusable component library. Collaborated closely with senior mentors at ArcTouch throughout the process, receiving training in engineering best practices, code reviews, Jira, Storybook, and GitHub workflows.",
+      images: [
+        '/projects/prw_web/browse_projects.png',
+        '/projects/prw_web/find_project.png',
+        '/projects/prw_web/find_people.png',
+      ],
+      nodes: ['TypeScript', 'React', 'Figma', 'Storybook', 'REST APIs', 'Accessibility', 'UI/UX'],
+      link: '',
+      date: '2024',
+    },
+    bg: 'var(--neutral-white)',
+  },
+  {
+    key: 'dillo-app-24',
+    component: ProjectStandard,
+    props: {
+      title: 'Dillo Day 2024: Mobile Application',
+      job: 'Co-Director of Design & Development, Mayfest Productions',
+      description:
+        "Mobile application built for Northwestern University's Dillo Day festival, attended by over 12,000 people each year in Evanston, IL. App includes artist lineups, real-time announcements, a festival map, a Spotify integration feature (e.g. ‘Find Your Cabin Mate’), and a contact section.",
+      images: [
+        '/projects/dillo-app/23_artists.png',
+        '/projects/dillo-app/23_help.png',
+        '/projects/dillo-app/23_home.png',
+      ],
+      nodes: ['TypeScript', 'React', 'Figma', 'Mobile App', 'UI/UX'],
+      link: 'https://apps.apple.com/us/app/dillo-day-2024/id6502626702',
+      date: '2024',
+    },
+    bg: 'var(--neutral-white)',
+  },
+  {
+    key: 'dillo-app-25',
+    component: ProjectStandard,
+    props: {
+      title: 'Dillo Day 2025: Mobile Application',
+      job: 'Co-Director of Design & Development, Mayfest Productions',
+      description:
+        'Mobile application for the Dillo Day festival, attended by over 12,000 participants every year in Evanston, IL. App includes artist lineups, real-time announcements, an interactive festival map, a ‘Tarot reading’ feature, food truck menus, and more.',
+      images: [
+        '/projects/dillo-app/24_home.jpeg',
+        '/projects/dillo-app/24_artist.png',
+        '/projects/dillo-app/24_nav.png',
+      ],
+      nodes: ['TypeScript', 'React', 'Figma', 'Mobile App', 'UI/UX'],
+      link: 'https://apps.apple.com/us/app/dillo-day-2025/id6745717280',
+      date: '2025',
+    },
+    bg: 'var(--neutral-white)',
   },
   {
     key: 'dillo-site',
-    component: MayfestSite,
+    component: ProjectStandard,
     props: {
       title: 'Dillo Day: Website',
-      job: '',
+      job: 'Co-Director of Design & Development, Mayfest Productions',
       description:
         'Website for Dillo Day, the US’s largest student-run music festival hosting ~12,000 attendees every year. Information includes lineup information, rules and logistics for entry, photos from past festivals, links to the mobile application, and more.',
-      images: [],
-      nodes: ['X', 'XX'],
-      link: '',
+      images: [
+        '/projects/dillo-web/dillo_home.png',
+        '/projects/dillo-web/meet_mayfest.png',
+        '/projects/dillo-web/past_lineups.png',
+      ],
+      nodes: ['TypeScript', 'React', 'Figma', 'Web Development', 'UI/UX'],
+      link: 'https://www.dilloday.com/',
+      date: '2024',
     },
-    bg: 'var(--secondary-green)',
+    bg: 'var(--neutral-white)',
+  },
+  {
+    key: 'mayfest-site',
+    component: ProjectStandard,
+    props: {
+      title: 'Mayfest Productions: Website Mockups',
+      job: 'Co-Director of Design & Development, Mayfest Productions',
+      description:
+        'Assorted Figma mockups for Mayfest Productions website, the Northwestern Student organization that organizes and runs the annual Dillo Day music festival, amongst other events. Information includes an organization overview, information about the team, upcoming events, and more.',
+      images: [
+        '/projects/dillo-web/mayfest_page.png',
+        '/projects/dillo-web/mayfest_events.png',
+        '/projects/dillo-web/mayfest_past.png',
+      ],
+      nodes: ['TypeScript', 'React', 'Figma', 'Web Development', 'UI/UX'],
+      link: '',
+      date: '2025',
+    },
+    bg: 'var(--neutral-white)',
   },
 ];
 
-// const projects: ProjectData[] = [
-//   {
-//     type: 'dillo',
-//     title: 'Dillo Day: Mobile Application',
-//     // className: "dillo-app",
-//     job: 'Co-director of Technology, Lead UI/UX and Graphics Designer, Front-end Engineer',
-//     description:
-//       'Mobile application for the Dillo Day festival, attended by over 12,000 participants every year in Evanston, IL. App includes artist lineups, real-time announcements, a festival map, a Spotify integration feature (‘Find Your Cabin Mate’), and a contact section.',
-//     images: ['/phone.png', '/phone2.jpeg'],
-//     nodes: ['X', 'XX'],
-//     link: '',
-//     bg: 'var(--secondary-green)',
-//     // bg: '#ff6b6b',
-//   },
-//   {
-//     type: 'mayfest',
-//     title: 'Mayfest Productions: Website',
-//     // className: "mayfest-website",
-//     job: '',
-//     description:
-//       'Website for Mayfest Productions, the Northwestern Student organization that organizes and runs the annual Dillo Day music festival, amongst other events. Information includes an organization overview, information about the team, upcoming events, and more. ',
-//     images: ['mayfest-website.png'],
-//     nodes: ['X', 'XX'],
-//     link: '',
-//     bg: 'var(--secondary-green)',
-//     // bg: '#6bc1ff',
-//   },
-//   {
-//     type: 'mayfest',
-//     title: 'Dillo Day: Website',
-//     job: '',
-//     description:
-//       'Website for Dillo Day, the US’s largest student-run music festival hosting ~12,000 attendees every year. Information includes lineup information, rules and logistics for entry, photos from past festivals, links to the mobile application, and more.',
-//     nodes: ['X', 'XX'],
-//     images: [],
-//     link: '',
-//     bg: 'var(--secondary-green)',
-//     // bg: '#c86bff',
-//   },
-// ];
+// ! ==================================
+
+const artItems: PageItem[] = [
+  {
+    key: 'hero',
+    component: HeroSection,
+    props: {
+      title: 'ART.',
+      images: ['/art/pen-drawings/3.jpeg'],
+    },
+    bg: 'var(--neutral-black)',
+  },
+  {
+    key: 'sketches',
+    component: GalleryStandard,
+    props: {
+      title: 'Assorted illustrations',
+      job: 'Ballpoint pen',
+      description: '',
+      images: [
+        '/art/pen-drawings/21.jpeg',
+        '/art/pen-drawings/20.jpeg',
+        '/art/pen-drawings/23.png',
+        '/art/pen-drawings/24.png',
+        '/art/pen-drawings/22.jpeg',
+        '/art/pen-drawings/1.jpeg',
+        '/art/pen-drawings/2.jpeg',
+        '/art/pen-drawings/3.jpeg',
+        '/art/pen-drawings/4.jpeg',
+        '/art/pen-drawings/5.jpeg',
+        '/art/pen-drawings/6.jpeg',
+        '/art/pen-drawings/7.jpeg',
+        '/art/pen-drawings/8.jpeg',
+        '/art/pen-drawings/9.jpeg',
+        '/art/pen-drawings/10.jpeg',
+        '/art/pen-drawings/11.jpeg',
+        '/art/pen-drawings/12.jpeg',
+        '/art/pen-drawings/13.jpeg',
+        '/art/pen-drawings/14.jpeg',
+        '/art/pen-drawings/15.jpeg',
+        '/art/pen-drawings/16.jpeg',
+        '/art/pen-drawings/17.jpeg',
+        '/art/pen-drawings/18.jpeg',
+        '/art/pen-drawings/19.jpeg',
+      ],
+      nodes: [],
+      link: '',
+      date: '2025',
+    },
+    bg: 'var(--neutral-white)',
+  },
+  {
+    key: 'c_table',
+    component: GalleryStandard,
+    props: {
+      title: 'Mid-Century C-Table',
+      job: 'Flatpack furniture design',
+      description: '',
+      images: ['/art/c_table/pic1.png', '/art/c_table/pic2.png', '/art/c_table/pic3.png'],
+      nodes: ['CNC', 'CAD', 'Plywood'],
+      link: '',
+      date: '2021',
+    },
+    bg: 'var(--neutral-white)',
+  },
+  {
+    key: 'multimedia',
+    component: GalleryStandard,
+    props: {
+      title: 'Assorted Multimedia Projects',
+      job: '',
+      description: '',
+      images: [
+        '/art/multimedia/pic1.png',
+        '/art/multimedia/pic2.png',
+        '/art/multimedia/pic4.png',
+        '/art/multimedia/pic6.jpeg',
+        '/art/multimedia/pic3.png',
+        '/art/multimedia/pic7.jpeg',
+        '/art/multimedia/pic5.jpeg',
+      ],
+      nodes: ['Acrylic Painting', 'Sculpture', 'Clay', 'Photography'],
+      link: '',
+      date: '2021',
+    },
+    bg: 'var(--neutral-white)',
+  },
+  {
+    key: 'pinecone_lamp',
+    component: GalleryStandard,
+    props: {
+      title: 'Mid-Century Pinecone Lamp',
+      job: 'Flatpack furniture design',
+      description: '',
+      images: ['/art/lamp/pic1.png', '/art/lamp/pic2.png'],
+      nodes: ['CNC', 'CAD', 'Laser cutter', 'Plywood'],
+      link: '',
+      date: '2021',
+    },
+    bg: 'var(--neutral-white)',
+  },
+];
 
 const COMPONENT_MAP = {
   about: <AboutPage pages={aboutItems} />,
-  experience: <ExperiencePage />,
+  research: <ResearchPage pages={researchItems} />,
   projects: <ProjectPage projects={projectItems} />,
+  art: <ArtPage pages={artItems} />,
   contact: <ContactPage />,
-  resume: <ResumePage />,
 };
 
 const HomePage: React.FC<HomePageProps> = ({ text }: HomePageProps) => {
   const [activePage, setActivePage] = useState<keyof typeof COMPONENT_MAP>('about');
   const [rotationCount, setRotationCount] = useState(0);
 
+  // const [activePage, setActivePage] = useState<keyof typeof COMPONENT_MAP>('about');
+  const [showStatic, setShowStatic] = useState(false);
+  const [staticKey, setStaticKey] = useState(0); // to restart the animation on each switch
+  const hideTimer = useRef<number | null>(null);
+
   const rotationStyles = useSpring({
     transform: `rotate(${rotationCount * 45}deg)`,
     config: { tension: 200, friction: 30 },
   });
 
-  // When a new page is selected
   const handleNavigate = (page: keyof typeof COMPONENT_MAP) => {
+    // show overlay and change page
+    setShowStatic(true);
+    setStaticKey((k) => k + 1); // remount StaticTransition to replay animation
     setActivePage(page);
-    setRotationCount((prev) => prev + 1); // Triggers rotation update
+
+    setRotationCount((prev) => prev + 1);
+
+    // clear any previous timer
+    if (hideTimer.current) window.clearTimeout(hideTimer.current);
+    hideTimer.current = window.setTimeout(() => {
+      setShowStatic(false);
+    }, 450); // duration that matches your CSS animation
   };
 
-  // const [expanded, setExpanded] = useState(false);
-
-  // const styles = useSpring({
-  //   width: expanded ? 300 : 100,
-  //   height: expanded ? 300 : 100,
-  //   backgroundColor: expanded ? "#6bc1ff" : "#ff6b6b",
-  //   config: { tension: 250, friction: 20 },
-  // });
-
-  // const styles = useSpring({
-  //   width: expanded ? 300 : 100,
-  //   height: expanded ? 300 : 100,
-  //   backgroundColor: expanded ? "#6bc1ff" : "#ff6b6b",
-  //   config: { tension: 250, friction: 20 },
-  // });
+  useEffect(
+    () => () => {
+      if (hideTimer.current) window.clearTimeout(hideTimer.current);
+    },
+    [],
+  );
 
   return (
     <div className="home">
       <NavBar onNavigate={handleNavigate} />
 
       <TVResponsive
-        child={COMPONENT_MAP[activePage]}
-        dial={
-          <animated.div style={rotationStyles} className="dial">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="110"
-              height="110"
-              viewBox="0 0 118 118"
-              fill="none"
-            >
-              <path
-                d="M57.7402 2.87402C58.3311 1.95902 59.6689 1.95902 60.2598 2.87402L64.8721 10.0186C65.6799 11.2699 67.3958 11.5411 68.5508 10.6006L75.1455 5.23145C75.9903 4.54375 77.2629 4.95775 77.542 6.01074L79.7207 14.2305C80.1023 15.6703 81.6509 16.4585 83.04 15.9209L90.9707 12.8525C91.9867 12.4595 93.0697 13.2463 93.0098 14.334L92.541 22.8242C92.459 24.3115 93.6885 25.541 95.1758 25.459L103.666 24.9902C104.754 24.9303 105.541 26.0133 105.147 27.0293L102.079 34.96C101.542 36.3491 102.33 37.8977 103.77 38.2793L111.989 40.458C113.042 40.7371 113.456 42.0097 112.769 42.8545L107.399 49.4492C106.459 50.6042 106.73 52.3201 107.981 53.1279L115.126 57.7402C116.041 58.3311 116.041 59.6689 115.126 60.2598L107.981 64.8721C106.73 65.6799 106.459 67.3958 107.399 68.5508L112.769 75.1455C113.456 75.9903 113.042 77.2629 111.989 77.542L103.77 79.7207C102.33 80.1023 101.542 81.6509 102.079 83.04L105.147 90.9707C105.541 91.9867 104.754 93.0697 103.666 93.0098L95.1758 92.541C93.6885 92.459 92.459 93.6885 92.541 95.1758L93.0098 103.666C93.0697 104.754 91.9867 105.541 90.9707 105.147L83.04 102.079C81.6509 101.542 80.1023 102.33 79.7207 103.77L77.542 111.989C77.2629 113.042 75.9903 113.456 75.1455 112.769L68.5508 107.399C67.3958 106.459 65.6799 106.73 64.8721 107.981L60.2598 115.126C59.6689 116.041 58.3311 116.041 57.7402 115.126L53.1279 107.981C52.3201 106.73 50.6042 106.459 49.4492 107.399L42.8545 112.769C42.0097 113.456 40.7371 113.042 40.458 111.989L38.2793 103.77C37.8977 102.33 36.3491 101.542 34.96 102.079L27.0293 105.147C26.0133 105.541 24.9303 104.754 24.9902 103.666L25.459 95.1758C25.541 93.6885 24.3115 92.459 22.8242 92.541L14.334 93.0098C13.2463 93.0697 12.4595 91.9867 12.8525 90.9707L15.9209 83.04C16.4585 81.6509 15.6703 80.1023 14.2305 79.7207L6.01074 77.542C4.95775 77.2629 4.54375 75.9903 5.23145 75.1455L10.6006 68.5508C11.5411 67.3958 11.2699 65.6799 10.0186 64.8721L2.87402 60.2598C1.95902 59.6689 1.95902 58.3311 2.87402 57.7402L10.0186 53.1279C11.2699 52.3201 11.5411 50.6042 10.6006 49.4492L5.23145 42.8545C4.54375 42.0097 4.95775 40.7371 6.01074 40.458L14.2305 38.2793C15.6703 37.8977 16.4585 36.3491 15.9209 34.96L12.8525 27.0293C12.4595 26.0133 13.2463 24.9303 14.334 24.9902L22.8242 25.459C24.3115 25.541 25.541 24.3115 25.459 22.8242L24.9902 14.334C24.9303 13.2463 26.0133 12.4595 27.0293 12.8525L34.96 15.9209C36.3491 16.4585 37.8977 15.6703 38.2793 14.2305L40.458 6.01074C40.7371 4.95775 42.0097 4.54375 42.8545 5.23145L49.4492 10.6006C50.6042 11.5411 52.3201 11.2699 53.1279 10.0186L57.7402 2.87402Z"
-                stroke="#1A53E6"
-              />
-              <circle cx="59" cy="59" r="40.5" stroke="#1A53E6" />
-              <rect
-                x="54"
-                y="12.5"
-                width="10"
-                height="46"
-                rx="4.5"
-                fill="#FBF6F3"
-                stroke="#1A53E6"
-              />
-            </svg>
-          </animated.div>
+        // child={COMPONENT_MAP[activePage]}
+        child={
+          // IMPORTANT: position this wrapper relative, so the overlay can be absolute inside it
+          <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+            {COMPONENT_MAP[activePage]}
+            {showStatic && <StaticTransition key={staticKey} />}
+          </div>
         }
       />
-      {/* </div> */}
-
-      {/* <TVResponsive child={<h1>Hello</h1>}/> */}
-
-      {/* <ProjectPage projects={projects} /> */}
-
-      {/* //! IGNORE THE REST HERE */}
-      {/* <ExpandableCard /> */}
-      {/* <Parallax pages={2} className="animation">
-        <ParallaxLayer offset={0} speed={0}>
-          <div className="welcome">
-            <WiggleText className="h1" text="H" />
-            <WiggleText className="h1" text="e" />
-            <WiggleText className="h1" text="l" />
-            <WiggleText className="h1" text="l" />
-            <WiggleText className="h1" text="o" />
-            <WiggleText className="h1" text="." />
-          </div>
-        </ParallaxLayer>
-        <ParallaxLayer offset={1} speed={0}>
-          <h1 style={{ fontSize: "5rem" }}>my name is cate rose.</h1>
-        </ParallaxLayer>
-        <ParallaxLayer offset={1} speed={1}>
-          <img src="picture-of-me.svg" alt="doodle profile of cate rose" />
-        </ParallaxLayer>
-        <ParallaxLayer offset={2} speed={1} style={{ backgroundColor: "red" }}>
-          <p style={{ fontSize: "5rem" }}>{text}</p>
-        </ParallaxLayer>
-      </Parallax> */}
     </div>
   );
 };

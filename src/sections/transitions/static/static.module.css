@@ -1,0 +1,240 @@
+.staticOverlay {
+  position: absolute; /* fills TV inner screen (parent must be position:relative) */
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+  animation: overlayFade 450ms ease-out forwards;
+  background-color: var(--neutral-white);
+  overflow: hidden;
+}
+
+.staticBase {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: 
+    repeating-linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.25) 0px,
+      rgba(0, 0, 0, 0.25) 1px,
+      rgba(255, 255, 255, 0.15) 1px,
+      rgba(255, 255, 255, 0.15) 2px,
+      transparent 2px,
+      transparent 3px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.25) 0px,
+      rgba(0, 0, 0, 0.25) 1px,
+      rgba(255, 255, 255, 0.15) 1px,
+      rgba(255, 255, 255, 0.15) 2px,
+      transparent 2px,
+      transparent 3px
+    );
+  background-size: 2px 2px, 2px 2px;
+  animation: staticBaseFlicker 60ms steps(6, end) infinite;
+  filter: contrast(1.5) brightness(1.2);
+}
+
+/* Scanlines effect - horizontal lines like old TV */
+.scanlines {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.3) 0px,
+    rgba(0, 0, 0, 0.3) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  pointer-events: none;
+  animation: scanlineMove 0.08s linear infinite;
+  mix-blend-mode: multiply;
+}
+
+/* Noise overlay for extra static */
+.noiseOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  background-image: 
+    repeating-linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.12) 0px,
+      rgba(0, 0, 0, 0.08) 1px,
+      transparent 1px,
+      transparent 2px,
+      rgba(255, 255, 255, 0.12) 2px,
+      rgba(255, 255, 255, 0.08) 3px,
+      transparent 3px,
+      transparent 4px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.12) 0px,
+      rgba(0, 0, 0, 0.08) 1px,
+      transparent 1px,
+      transparent 2px,
+      rgba(255, 255, 255, 0.12) 2px,
+      rgba(255, 255, 255, 0.08) 3px,
+      transparent 3px,
+      transparent 4px
+    );
+  background-size: 3px 3px;
+  pointer-events: none;
+  animation: noiseFlicker 40ms steps(5, end) infinite;
+  mix-blend-mode: overlay;
+  opacity: 0.9;
+}
+
+/* Flicker effect */
+.flicker {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  background: rgba(255, 255, 255, 0.08);
+  pointer-events: none;
+  animation: tvFlicker 80ms steps(4, end) infinite;
+  mix-blend-mode: screen;
+}
+
+@keyframes overlayFade {
+  0% {
+    opacity: 1;
+  }
+  60% {
+    opacity: 0.8;
+  }
+  80% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes staticBaseFlicker {
+  0% {
+    background-position: 0 0, 0 0;
+    opacity: 1;
+    transform: translateX(0);
+  }
+  16% {
+    background-position: 1px 1px, -1px -1px;
+    opacity: 0.92;
+    transform: translateX(-0.5px);
+  }
+  33% {
+    background-position: -1px 1px, 1px -1px;
+    opacity: 0.98;
+    transform: translateX(0.5px);
+  }
+  50% {
+    background-position: 1px -1px, -1px 1px;
+    opacity: 0.94;
+    transform: translateX(-0.3px);
+  }
+  66% {
+    background-position: -1px -1px, 1px 1px;
+    opacity: 0.96;
+    transform: translateX(0.3px);
+  }
+  83% {
+    background-position: 1px 1px, -1px -1px;
+    opacity: 0.93;
+    transform: translateX(-0.2px);
+  }
+  100% {
+    background-position: 0 0, 0 0;
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scanlineMove {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(3px);
+  }
+}
+
+@keyframes noiseFlicker {
+  0% {
+    background-position: 0 0, 0 0;
+    opacity: 1;
+  }
+  20% {
+    background-position: 2px 2px, -2px -2px;
+    opacity: 0.85;
+  }
+  40% {
+    background-position: -2px 2px, 2px -2px;
+    opacity: 0.92;
+  }
+  60% {
+    background-position: 2px -2px, -2px 2px;
+    opacity: 0.88;
+  }
+  80% {
+    background-position: -2px -2px, 2px 2px;
+    opacity: 0.9;
+  }
+  100% {
+    background-position: 0 0, 0 0;
+    opacity: 1;
+  }
+}
+
+@keyframes tvFlicker {
+  0% {
+    opacity: 0;
+    background: rgba(255, 255, 255, 0);
+  }
+  25% {
+    opacity: 1;
+    background: rgba(255, 255, 255, 0.12);
+  }
+  50% {
+    opacity: 0.6;
+    background: rgba(0, 0, 0, 0.08);
+  }
+  75% {
+    opacity: 0.8;
+    background: rgba(255, 255, 255, 0.06);
+  }
+  100% {
+    opacity: 0;
+    background: rgba(255, 255, 255, 0);
+  }
+}
+
+/* ! =================== */
+/* 
+.staticOverlay {
+  position: absolute;
+  inset: 0; 
+  z-index: 10; 
+  pointer-events: none;
+  display: grid; 
+  place-items: center;
+  animation: flicker 400ms steps(6, end);
+  background: #fff; 
+}
+
+@keyframes flicker {
+  0% {
+    opacity: 1;
+  }
+  40% {
+    opacity: 0.3;
+  }
+  70% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 0;
+  }
+} */

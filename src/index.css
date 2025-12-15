@@ -9,7 +9,8 @@
   --neutral-white-cursor: rgba(251, 246, 243, 0.5);
   --neutral-black: #1f1e1e;
 
-  --primary-blue: #1a53e6;
+  --primary-blue: #1f1e1e;
+  /* --primary-blue: #1a53e6; */
   --primary-blue-cursor: rgba(26, 83, 230, 0.5);
 
   --secondary-green: #098b3b;
@@ -44,7 +45,6 @@ body {
 }
 
 body {
-  cursor: url('/cursor-hover.svg'), auto;
   margin: 0;
   background-color: var(--neutral-white);
   /* background-color: #008000; */
@@ -56,7 +56,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
-  /* cursor: url("public/cursor.svg"), auto; */
 }
 
 .display-title-1 {
@@ -86,6 +85,14 @@ body {
 .project-body-1 {
   font-size: 16px;
   font-weight: 400;
+}
+
+/* Make interests text black in Hello component */
+[class*='interestsDiv'] .class-node,
+[class*='interestsDiv'] .class-node a {
+  color: var(--neutral-black) !important;
+  border-color: var(--neutral-black) !important;
+  font-family: var(--font-secondary) !important;
 }
 
 /*
