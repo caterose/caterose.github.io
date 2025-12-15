@@ -10,7 +10,7 @@ interface NavBarProps {
 
 const pages = [
   { label: 'ABOUT.', key: 'about' },
-  { label: 'EXPERIENCE.', key: 'experience' },
+  { label: 'RESEARCH.', key: 'research' },
   { label: 'PROJECTS.', key: 'projects' },
   { label: 'ART.', key: 'art' },
   { label: 'CONTACT.', key: 'contact' },

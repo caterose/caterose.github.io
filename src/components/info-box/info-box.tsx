@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from 'react';
 // import { SvgIconProps } from "@mui/material/SvgIcon";
-import { useIsMobile } from "../../hooks/use-is-mobile";
-
-import "./info-box.css";
+import { useIsMobile } from '../../hooks/use-is-mobile';
+import { CursorContext } from '../../context/cursor-context';
+import './info-box.css';
 
 export interface InfoBoxProps {
   // icon: React.ComponentType<SvgIconProps>;
@@ -17,6 +17,7 @@ export default function InfoBox({
   title,
   description,
 }: InfoBoxProps) {
+  const [, setCursor] = useContext(CursorContext);
   const [isOpen, setIsOpen] = useState(false);
   const [showPullout, setShowPullout] = useState(false);
   const [fadingOut, setFadingOut] = useState(false);
@@ -52,12 +53,14 @@ export default function InfoBox({
         <div
           className="card"
           onClick={handleClick}
+          onMouseEnter={() => setCursor({ active: true })}
+          onMouseLeave={() => setCursor({ active: false })}
           style={{
-            width: isOpen ? "300px" : "150px",
-            minWidth: "150px",
-            maxWidth: "300px",
-            height: "150px",
-            transition: "width 0.25s ease",
+            width: isOpen ? '300px' : '150px',
+            minWidth: '150px',
+            maxWidth: '300px',
+            height: '150px',
+            transition: 'width 0.25s ease',
           }}
         >
           <div className={`card-front`}>
@@ -70,7 +73,7 @@ export default function InfoBox({
             <h3 className="title body-text-3">{title}</h3>
           </div>
           <div
-            className={`card-pullout ${showPullout ? "visible" : fadingOut ? "fading-out" : ""}`}
+            className={`card-pullout ${showPullout ? 'visible' : fadingOut ? 'fading-out' : ''}`}
           >
             {description}
           </div>
@@ -79,12 +82,14 @@ export default function InfoBox({
         <div
           className="card"
           onClick={handleClick}
+          onMouseEnter={() => setCursor({ active: true })}
+          onMouseLeave={() => setCursor({ active: false })}
           style={{
-            width: isOpen ? "470px" : "200px",
-            minWidth: "200px",
-            maxWidth: "470px",
-            height: "200px",
-            transition: "width 0.25s ease",
+            width: isOpen ? '470px' : '200px',
+            minWidth: '200px',
+            maxWidth: '470px',
+            height: '200px',
+            transition: 'width 0.25s ease',
           }}
         >
           <div className={`card-front`}>
@@ -97,7 +102,7 @@ export default function InfoBox({
             <h3 className="title body-text-3">{title}</h3>
           </div>
           <div
-            className={`card-pullout ${showPullout ? "visible" : fadingOut ? "fading-out" : ""}`}
+            className={`card-pullout ${showPullout ? 'visible' : fadingOut ? 'fading-out' : ''}`}
           >
             {description}
           </div>

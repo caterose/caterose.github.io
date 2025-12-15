@@ -113,6 +113,19 @@
   /* border: 2px solid blue; */
 }
 
+.interestsDiv :global(.class-node) {
+  color: var(--neutral-black) !important;
+  border-color: var(--neutral-black) !important;
+}
+
+.interestsDiv :global(.class-node) :global(a) {
+  color: var(--neutral-black) !important;
+}
+
+.interestsDiv :global(a) {
+  color: var(--neutral-black) !important;
+}
+
 /* .interestsDiv .row {
   display: flex;
   gap: 16px;

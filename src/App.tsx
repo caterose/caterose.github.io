@@ -1,17 +1,18 @@
-import "./App.css";
-import CursorContextProvider from "./context/cursor-context-provider";
-import Cursor from "./components/cursor/cursor";
+import './App.css';
+import CursorContextProvider from './context/cursor-context-provider';
+import MobileBlocker from './components/mobile-blocker/mobile-blocker';
 
-import HomePage from "./pages/home-page/home";
+import HomePage from './pages/home-page/home';
 
 function App() {
   return (
-    <div className="app-test">
-      <CursorContextProvider>
-        <Cursor />
-        <HomePage text="now!" />
-      </CursorContextProvider>
-    </div>
+    <MobileBlocker>
+      <div className="app-test">
+        <CursorContextProvider>
+          <HomePage text="now!" />
+        </CursorContextProvider>
+      </div>
+    </MobileBlocker>
   );
 }
 

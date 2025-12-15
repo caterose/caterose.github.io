@@ -35,6 +35,10 @@ const PageMapping: React.FC<PageMappingProps> = ({ transitions, items }) => {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
+          willChange: 'transform, opacity',
+          backfaceVisibility: 'hidden',
+          WebkitBackfaceVisibility: 'hidden',
+          perspective: 1000,
         }}
       >
         <Comp {...it.props} />

@@ -1,79 +1,87 @@
-import { useState, useRef, useEffect } from 'react';
-// import { useTransition } from '@react-spring/web';
-// import type { ProjectData } from '../../components/page-mapping/page-mapping';
-import { useIndexTransition } from '../../hooks/use-index-transition';
+import { useContext, useState, useEffect } from 'react';
+import { useTransition, animated } from '@react-spring/web';
 import './project-page.css';
-import PageMapping from '../../components/page-mapping/page-mapping';
 import type { PageItem } from '../../components/page-mapping/page-mapping';
-
-// export interface ProjectData {
-//   type: string;
-//   title: string;
-//   job: string;
-//   description: string;
-//   images: string[];
-//   nodes: string[];
-//   link: string;
-//   bg: string;
-// }
+import { ProjectProvider } from '../../contexts/project-context';
+import { CursorContext } from '../../context/cursor-context';
 
 interface ProjectPageProps {
   projects: PageItem[];
-  // projects: ProjectData[];
 }
 
 const ProjectPage: React.FC<ProjectPageProps> = ({ projects }) => {
-  const { transitions, activeIndex, goTo } = useIndexTransition(projects.length);
-  // const [navVisible, setNavVisible] = useState(true);
-  // const [activeIndex, setActiveIndex] = useState(0);
-  // const prevIndexRef = useRef(0);
-  // const direction = activeIndex > prevIndexRef.current ? 'down' : 'up';
+  const [, setCursor] = useContext(CursorContext);
+  const [activeIndex, setActiveIndex] = useState(0);
 
-  // const transitions = useTransition(activeIndex, {
-  //   key: activeIndex,
-  //   from: {
-  //     transform: direction === 'down' ? 'translateY(100%)' : 'translateY(-100%)',
-  //   },
-  //   enter: { transform: 'translateY(0%)' },
-  //   leave: {
-  //     transform: direction === 'down' ? 'translateY(-50%)' : 'translateY(50%)',
-  //   },
-  //   config: { mass: 2, tension: 240, friction: 40 },
-  //   onRest: () => {
-  //     prevIndexRef.current = activeIndex;
-  //   },
-  // });
+  const transitions = useTransition(activeIndex, {
+    key: activeIndex,
+    from: { opacity: 0 },
+    enter: { opacity: 1 },
+    leave: { opacity: 0 },
+    config: { mass: 1, tension: 200, friction: 30 }, // Smooth fade transition
+  });
 
-  // // 🔑 Add keyboard arrow navigation
-  // useEffect(() => {
-  //   const handleKeyDown = (e: KeyboardEvent) => {
-  //     if (e.key === 'ArrowDown') {
-  //       setActiveIndex((prev) => (prev < projects.length - 1 ? prev + 1 : prev));
-  //     } else if (e.key === 'ArrowUp') {
-  //       setActiveIndex((prev) => (prev > 0 ? prev - 1 : prev));
-  //     }
-  //   };
+  const goTo = (index: number) => {
+    setActiveIndex(index);
+  };
 
-  //   window.addEventListener('keydown', handleKeyDown);
-  //   return () => window.removeEventListener('keydown', handleKeyDown);
-  // }, [projects.length]);
+  // Add keyboard arrow navigation
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowDown') {
+        setActiveIndex((prev) => (prev < projects.length - 1 ? prev + 1 : prev));
+      } else if (e.key === 'ArrowUp') {
+        setActiveIndex((prev) => (prev > 0 ? prev - 1 : prev));
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [projects.length]);
 
   return (
-    <div className="nav-projects">
-      <div className="project-content">
-        <div className="project-nav">
-          {projects.map((_, i) => (
-            <div
-              key={i}
-              className={`nav-dot ${i === activeIndex ? 'active' : ''}`}
-              onClick={() => goTo(i)}
-            />
-          ))}
-        </div>
+    <ProjectProvider projects={projects} activeIndex={activeIndex} goTo={goTo}>
+      <div className="nav-projects">
+        <div className="project-content">
+          <div className="project-nav">
+            {projects.map((_, i) => (
+              <div
+                key={i}
+                className={`nav-dot ${i === activeIndex ? 'active' : ''} ${projects[activeIndex]?.bg === 'var(--neutral-white)' ? 'inverse-dot' : ''}`}
+                onClick={() => goTo(i)}
+                onMouseEnter={() => setCursor({ active: true })}
+                onMouseLeave={() => setCursor({ active: false })}
+              />
+            ))}
+          </div>
 
-        <PageMapping transitions={transitions} items={projects} />
+          {transitions((style, i) => {
+            const project = projects[i];
+            if (!project) return null;
+
+            const Comp = project.component;
+            return (
+              <animated.div
+                key={project.key ?? i}
+                className="project-panel"
+                style={{
+                  ...style,
+                  backgroundColor: project.bg,
+                  position: 'absolute',
+                  inset: 0,
+                  margin: 'auto',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                <Comp {...project.props} />
+              </animated.div>
+            );
+          })}
+        </div>
       </div>
-    </div>
+    </ProjectProvider>
   );
 };
 

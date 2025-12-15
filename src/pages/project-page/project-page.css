@@ -1,4 +1,4 @@
-@import url("../../index.css");
+@import url('../../index.css');
 
 /* Reset default spacing
 html,
@@ -17,7 +17,6 @@ body {
   display: flex;
   flex-direction: row;
 }
-
 
 .nav-projects {
   position: relative;
@@ -74,6 +73,10 @@ body {
   flex: 1;
   position: relative;
   overflow: hidden;
+  /* Optimize for smooth transitions */
+  transform: translateZ(0);
+  will-change: contents;
+  isolation: isolate;
 }
 
 .project-nav {
@@ -86,19 +89,37 @@ body {
   flex-direction: column;
   gap: 12px;
   z-index: 10;
+  transition:
+    opacity 0.3s ease,
+    visibility 0.3s ease;
+}
+
+body.image-modal-open .project-nav {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
 }
 
 .nav-dot {
   width: 18px;
   height: 18px;
   border-radius: 50%;
-  border: 1px solid white;
+  border: 1px solid var(--neutral-white);
   cursor: pointer;
   transition: all 0.3s;
+  background-color: transparent;
 }
 
 .nav-dot.active {
-  background-color: white;
+  background-color: var(--neutral-white);
+}
+
+.nav-dot.inverse-dot {
+  border: 1px solid var(--neutral-black);
+}
+
+.nav-dot.inverse-dot.active {
+  background-color: var(--neutral-black);
 }
 
 .project-panel {

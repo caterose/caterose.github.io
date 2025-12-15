@@ -1,0 +1,68 @@
+@import url('../../../index.css');
+
+.content,
+.content * {
+  display: flex;
+}
+
+.content {
+  /* border: 2px solid yellow; */
+  margin: 0;
+  height: 100%;
+  /* flex-direction: column; */
+  flex-direction: row !important;
+  align-items: center;
+  gap: 50px;
+}
+
+.left {
+  /* border: 2px solid blue; */
+  height: 100%;
+  /* display: flex; */
+}
+
+img {
+  border-radius: 10px;
+}
+
+.right {
+  font-family: var(--font-secondary);
+  /* border: 2px solid blue; */
+  gap: 10px;
+  height: 100%;
+  flex-direction: column !important;
+}
+
+.projectTitle {
+  margin: 0;
+  font-style: italic;
+}
+
+.titleDiv {
+  flex-direction: column;
+}
+
+.jobTitle {
+  /* margin: 0 0 15px 0; */
+  margin: 0;
+  /* font-style: none !important; */
+  font-weight: 400;
+}
+
+.descriptions {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.fastFacts {
+  text-decoration: none !important;
+  font-weight: 800 !important;
+  font-style: italic;
+}
+
+.skillNodes {
+  flex-direction: row !important;
+  flex-wrap: wrap;
+  gap: 10px;
+}

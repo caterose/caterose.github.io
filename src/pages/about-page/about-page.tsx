@@ -1,6 +1,5 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTransition } from '@react-spring/web';
-import { useIndexTransition } from '../../hooks/use-index-transition';
 import PageMapping from '../../components/page-mapping/page-mapping';
 import type { PageItem } from '../../components/page-mapping/page-mapping';
 import styles from './about-page.module.css';
@@ -10,10 +9,33 @@ interface AboutProps {
 }
 
 const AboutPage = ({ pages }: { pages: PageItem[] }) => {
-  const { transitions, activeIndex, goTo } = useIndexTransition(pages.length, {
-    axis: 'y', // or 'x'
-    // tweak spring/offsets if you want
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const transitions = useTransition(activeIndex, {
+    key: activeIndex,
+    from: { opacity: 0 },
+    enter: { opacity: 1 },
+    leave: { opacity: 0 },
+    config: { mass: 1, tension: 200, friction: 30 }, // Smooth fade transition
   });
+
+  const goTo = (index: number) => {
+    setActiveIndex(index);
+  };
+
+  // Add keyboard arrow navigation
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowDown') {
+        setActiveIndex((prev) => (prev < pages.length - 1 ? prev + 1 : prev));
+      } else if (e.key === 'ArrowUp') {
+        setActiveIndex((prev) => (prev > 0 ? prev - 1 : prev));
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [pages.length]);
 
   return (
     <div className={styles.navProjects}>

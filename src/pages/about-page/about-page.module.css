@@ -12,6 +12,10 @@
   flex: 1;
   position: relative;
   overflow: hidden;
+  /* Optimize for smooth transitions */
+  transform: translateZ(0);
+  will-change: contents;
+  isolation: isolate;
 }
 
 .projectNav {

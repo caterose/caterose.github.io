@@ -2,19 +2,11 @@
 
 .tvDiv {
   display: flex;
-  flex-direction: row;
-  margin: 40px auto 0 auto;
-  /* top auto bottom auto */
-  gap: 20px;
-
+  flex-direction: column;
+  margin: 0;
   width: 100%;
-  max-width: 1600px; /* controls how wide it can grow */
-  /* padding-left: 20px;
-  padding-right: 20px; */
+  height: calc(100vh - var(--nav-height, 80px)); /* Adjust based on your nav bar height */
   box-sizing: border-box;
-  justify-content: space-between;
-
-  /* border: 10px solid red; */
 }
 .tvScreenOuter,
 .tvScreenInner,
@@ -45,35 +37,23 @@
 } */
 
 .tvScreenOuter {
-  border-radius: 20px;
+  border-radius: 0;
   background-color: var(--neutral-black);
-  border: 1px solid var(--primary-blue);
-  width: 80%;
-  /* height: 700px; */
-  min-height: 100%;
+  border: none;
+  border-top: 1px solid var(--primary-blue);
+  width: 100%;
+  height: 100%;
   padding: 20px;
   box-sizing: border-box;
 }
 
 .tvScreenInner {
-  /* Give it a concrete height or let the child control via aspect-ratio */
-  /* Example: */
-  /* min-height: 600px; */
   border: 1px solid var(--primary-blue);
   border-radius: 20px;
-  overflow: hidden; /* keep content clipped */
-  position: relative; /* anchor absolutely-positioned children */
-
-  /* ! MAYBE DELETE */
+  overflow: hidden;
+  position: relative;
   width: 100%;
   height: 100%;
-
-  /* border-radius: 20px;
-  width: 100%;
-  height: 100%;
-  border: 1px solid var(--primary-blue);
-  overflow: hidden; 
-  position: relative;  */
 }
 
 .tvSidePanel {

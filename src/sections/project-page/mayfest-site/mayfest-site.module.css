@@ -1,55 +1,254 @@
-@import url("../../../index.css");
-
-
-.content, .content * {
-    display: flex;
-}
+@import url('../../../index.css');
 
 .content {
-    /* border: 2px solid yellow; */
-    margin: 0;
-    height: 100%;
-    flex-direction: row !important;
-    align-items: center;
-    gap: 0;
+  display: flex;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  flex-direction: row !important;
+  align-items: stretch;
+  gap: 0;
 }
 
-.left { 
-    /* border: 2px solid blue; */
-    height: 100%;
+.content > .right {
+  display: flex;
+}
 
+.left {
+  /* border: 2px solid blue; */
+  height: 100%;
+  width: 50%;
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  position: relative;
+  overflow: visible;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 .right {
-    /* border: 2px solid blue; */
+  /* border: 2px solid blue; */
   height: 100%;
 }
 
 .projectTitle {
-    margin: 0;
+  margin: 0;
 }
 
 .jobTitle {
-    margin: 0;
-    font-weight: 400;
-
+  margin: 0;
+  font-weight: 400;
 }
 
 .description {
-
 }
 
 .fastFacts {
-
 }
 
 .factNodes {
-    flex-direction: row !important;
-    gap: 10px;
-
+  flex-direction: row !important;
+  gap: 10px;
+  flex-wrap: wrap;
 }
 
+.projectNode {
+  background: rgba(9, 139, 59, 0.2);
+  border: 1px solid var(--secondary-green);
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--secondary-green);
+  display: inline-block;
+}
 
-/* @media screen & ({
-    
-} */
+/* Image Display Styles */
+.projectImagesContainer {
+  margin-bottom: 12px;
+  width: 100%;
+}
+
+.projectImages {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  scroll-behavior: smooth;
+  padding-bottom: 8px;
+}
+
+.projectImages::-webkit-scrollbar {
+  display: none;
+}
+
+.projectImage {
+  width: 250px;
+  height: 250px;
+  min-width: 250px;
+  min-height: 250px;
+  border-radius: 4px;
+  border: 1px solid rgba(31, 30, 30, 0.2);
+  object-fit: cover;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+}
+
+.projectImage:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(31, 30, 30, 0.2);
+}
+
+.imageDots {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.imageDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(31, 30, 30, 0.3);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.imageDot.active {
+  background: var(--primary-blue);
+  width: 20px;
+  border-radius: 3px;
+}
+
+/* Image Modal Styles */
+.imageModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  cursor: pointer;
+  padding: 60px 20px 80px 20px;
+  box-sizing: border-box;
+}
+
+.imageModalContent {
+  position: relative;
+  width: 100%;
+  max-width: 80vw;
+  height: calc(100vh - 140px);
+  max-height: calc(100vh - 140px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.imageModalImage {
+  width: 100%;
+  height: 100%;
+  max-width: 80vw;
+  max-height: calc(100vh - 140px);
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.imageModalClose {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: rgba(0, 0, 0, 0.7);
+  border: 2px solid var(--neutral-white);
+  color: var(--neutral-white);
+  font-size: 32px;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  transition: all 0.2s ease;
+  z-index: 1001;
+}
+
+.imageModalClose:hover {
+  background: var(--neutral-white);
+  color: var(--neutral-black);
+}
+
+.imageModalNav {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.7);
+  border: 2px solid var(--neutral-white);
+  color: var(--neutral-white);
+  font-size: 48px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  transition: all 0.2s ease;
+  z-index: 1001;
+}
+
+.imageModalNav:hover {
+  background: var(--neutral-white);
+  color: var(--neutral-black);
+}
+
+.imageModalPrev {
+  left: 20px;
+}
+
+.imageModalNext {
+  right: 20px;
+}
+
+.imageModalDots {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 1001;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 10px 16px;
+  border-radius: 25px;
+}
+
+.imageModalDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.imageModalDot.active {
+  background: var(--neutral-white);
+  width: 24px;
+  border-radius: 4px;
+}
